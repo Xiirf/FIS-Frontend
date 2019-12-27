@@ -1,0 +1,9 @@
+$react-rater-link: rgb(201, 201, 201) !default; // color of star not rated
+$react-rater-hover: rgb(255, 246, 126) !default; // color of star on hover
+$react-rater-active: rgb(219, 216, 0) !default; // color of star rated
+
+@import "react-rater/lib/react-rater.scss";
+
+.react-rater-star {
+    font-size: 24px;
+}
