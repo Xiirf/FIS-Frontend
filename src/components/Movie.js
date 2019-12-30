@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-function Film(props) {
+function Movie(props) {
   return (
     <div className="film-css row shadow-sm bg-white rounded my-3">
       <div className="col-3">
@@ -37,4 +37,4 @@ function Film(props) {
   );
 }
 
-export default Film;
+export default Movie;
