@@ -16,6 +16,25 @@ class ReviewsPage extends React.Component{
         //cambiar las reviews que se estan mostrando para el caso de que hay más de 5 reviews con alguna relacion entre el numero de paginas
         //this.state.reviews[].json()
 
+        //primero calculamos el número de divisiones del array siendo una division cada 5 elementos, es decir 5 reviews por pagina
+        //por ejemplo si tenemos 12 elementos, tendremos 3 paginas: la primera y la segunda contendran 5 reviews cada una pero la ultima 
+        //solo 2:
+        //numberOfDivisions=Math.round(this.state.reviews.length/5)
+
+        //dependiendo del numero de divisiones (paginas) y la pagina actual tendremos que imprimir unas reviews u otras
+        //si la pagina es igual al numero de divisiones habra que imprimir desde (5xi)-4 hasta el tamaño maximo (en este ejemplo serian r11, y r12)
+        //en los demas casos sera desde (5xi)-4 hasta 5xi
+        let beginning=(5*pagenumber)-4;
+        let end=5*pagenumber;
+
+        //imprimimos por pantalla las reviews de esa pagina
+        for(let i=beginning; i < end+1;i++){
+
+            this.state.reviews[i].json().then(review=>console.log(review));
+
+        }
+
+        
         this.setState({currentPage:pagenumber})
     }
 
@@ -23,11 +42,12 @@ class ReviewsPage extends React.Component{
 
          //el numero de paginas en el que se van a paginar las reviews
         //depende directamente del número de reviews.
-        const numberOfPages = 2;
+        //number of pages: Math.round(this.state.reviews.length/5-> numero de reviews (tamaño del array)/ reviews por pagina
+        //al redondear ese resultado da el numero de paginas
     
         return(
 
-            <Pagination pages={numberOfPages} nextPage={this.state.currentPage,this.state.reviews} currentPage={this.state.currentPage}/>  
+            <Pagination pages={Math.round(this.state.reviews.length/5)} nextPage={this.state.currentPage} currentPage={this.state.currentPage}/>  
         );
     }
 }
