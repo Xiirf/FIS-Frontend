@@ -1,18 +1,32 @@
 import React from 'react';
 import './App.css';
-
+import ReviewsPage from './components/ReviewComponent/ReviewsPage.jsx';
 import Review from './components/ReviewComponent/Review.jsx';
 
 
-function App() {
+ function App () {
+  const reviews=[new Review ({id:"e4sdfg23fsdf3",user:"NoLoSe",title:"Buena peli", rating:4, timestamp:"2019-12-27T17:32:36.884+01:00", content:"La peli ha estado muy bien. Me ha gustado el actor principal." ,impressions:{likes:10,dislikes:0,spams:0}}), 
+  new Review ({id:"e4sdfg23fsdf3",user:"Rick",title:"Buena peli", rating:4, timestamp:"2019-12-27T17:32:36.884+01:00", content:"La peli ha estado muy bien. Me ha gustado el actor principal." ,impressions:{likes:10,dislikes:0,spams:0}}),
+  new Review ({id:"e4sdfg23fsdf3",user:"PareceFalso",title:"Buena peli", rating:4, timestamp:"2019-12-27T17:32:36.884+01:00", content:"La peli ha estado muy bien. Me ha gustado el actor principal." ,impressions:{likes:10,dislikes:0,spams:0}})
+  ];
+
+  //si hay más de cinco reviews se realiza la paginación si no se imprimen directamente
   return (
     <div className="App">
-      
-      <div className="container mt-5">
-        <Review id="e4sdfg23fsdf3" username="rick_957" title="Buena peli" rating={4} timestamp="2019-12-27T17:32:36.884+01:00" content="La peli ha estado muy bien. Me ha gustado el actor principal." likes={10} dislikes={0} spams={0} />
+
+        {reviews.length<5 ? 
+                        reviews.map((review)=>
+                                (<div className="container mt-3">
+                                                <div clasName="card">
+                                                        <h5 className="card-title">{review.title}</h5>
+                                                </div>
+                                </div>))
+
+                        :<ReviewsPage reviews={reviews} />
+          } 
+
       </div>
       
-    </div>
   );
 }
 
