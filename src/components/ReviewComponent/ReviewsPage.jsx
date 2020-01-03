@@ -24,15 +24,16 @@ class ReviewsPage extends React.Component{
         //dependiendo del numero de divisiones (paginas) y la pagina actual tendremos que imprimir unas reviews u otras
         //si la pagina es igual al numero de divisiones habra que imprimir desde (5xi)-4 hasta el tamaño maximo (en este ejemplo serian r11, y r12)
         //en los demas casos sera desde (5xi)-4 hasta 5xi
+
         let beginning=(5*pagenumber)-4;
         let end=5*pagenumber;
 
         //imprimimos por pantalla las reviews de esa pagina
-        for(let i=beginning; i < end+1;i++){
+        /*for(let i=beginning; i < end+1;i++){
 
-            this.state.reviews[i].json().then(review=>console.log(review));
+       <div>{console.log(this.state.reviews[i])} </div>
 
-        }
+        }*/
 
         
         this.setState({currentPage:pagenumber})
@@ -44,10 +45,11 @@ class ReviewsPage extends React.Component{
         //depende directamente del número de reviews.
         //number of pages: Math.round(this.state.reviews.length/5-> numero de reviews (tamaño del array)/ reviews por pagina
         //al redondear ese resultado da el numero de paginas
+       let numberOfpages=Math.round(this.state.reviews.length/5);
     
         return(
 
-            <Pagination pages={Math.round(this.state.reviews.length/5)} nextPage={this.state.currentPage} currentPage={this.state.currentPage}/>  
+            <Pagination pages={numberOfpages} nextPage={this.nextPage} currentPage={this.state.currentPage}/>  
         );
     }
 }
