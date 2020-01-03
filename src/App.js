@@ -1,33 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faSearch } from '@fortawesome/free-solid-svg-icons'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Movies from './components/Movies';
+import { Router, Route, browserHistory } from 'react-router'; 
+import MovieDetails from './components/MovieDetails';
+
+library.add(fab, faCheckSquare, faSearch);
 
 function App() {
-  let movies = [
-    {name: "Star Wars: El ascenso de España",img: "https://image.tmdb.org/t/p/w1280/16G2wZAkmKqSGK3it2VPjco5oyn.jpg", rate: "9.999", resume: "Españita siempre arriba arribisima, todos los dias sale el sol chipiron, que ganas de verte y comerte la vida", status: "Pendiente" },
-    {name: "Star Wars: El ascenso de España",img: "https://image.tmdb.org/t/p/w1280/16G2wZAkmKqSGK3it2VPjco5oyn.jpg", rate: "9.999", resume: "Españita siempre arriba arribisima, todos los dias sale el sol chipiron, que ganas de verte y comerte la vida", status: "Pendiente" }
-  ];
   return (
     <div className="App">
-      <Movies movies={movies}></Movies>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          <code>src/App.js</code>
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router history={browserHistory}>
+        <Route path="/" component={Movies}></Route>
+        <Route path="/movie/(:filter)" component={MovieDetails}></Route>
+      </Router>
     </div>
   );
 }
