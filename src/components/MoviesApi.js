@@ -3,7 +3,10 @@ class MoviesApi {
     static API_BASE_URL = "/api/v1";
 
     static requestHeaders() {
-        return { 'Content-Type': 'application/json'}
+        return { 
+            'Content-Type': 'application/json',
+            'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6ImxvZ2luSG9sYSIsImlhdCI6MTU3ODE1MjIyNSwiZXhwIjoxNTc4MTU1ODI1fQ.X3WjM9bmKQ0saUZI7jURfVszyzbxUCi9Hq7j_sZU4Q4'
+        }
     }
 
     static getMovieStatusById(id) {
