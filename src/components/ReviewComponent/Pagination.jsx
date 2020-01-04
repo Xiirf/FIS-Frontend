@@ -9,7 +9,7 @@ function Pagination(props){
         let active = props.currentPage ===i ? 'active':'';
 
         //the style is define as google for the active number and we will give the number of the page through i
-        pageLinks.push(<li  className = {`waves-effect  ${active}`} key={i} onClick={() => props.nextPage(i)}> <a href="#">{i}</a></li>)
+        pageLinks.push(<li  className = {`waves-effect  ${active}`} key={i} onClick={() => props.nextPage(i)}><a href="#">{i}</a></li>)
     }
 
     return (

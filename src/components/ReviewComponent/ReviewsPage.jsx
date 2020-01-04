@@ -29,19 +29,19 @@ class ReviewsPage extends React.Component{
 
         let beginning=(5*pagenumber)-4;
         let end=5*pagenumber;
-        /*let j=1;
-        array=[];
+        let j=1;
+        let array=[];
         //imprimimos por pantalla las reviews de esa pagina
         for(let i=beginning; i < end+1;i++){
 
                 array[j]=this.state.reviews[i];
                 j=j+1;
         }
-        */
+
 
         
         this.setState({currentPage:pagenumber})
-        //this.setState({printReviews:array});
+        this.setState({printReviews:array});
     }
 
     render(){
@@ -53,8 +53,16 @@ class ReviewsPage extends React.Component{
        let numberOfpages=Math.round(this.state.reviews.length/5);
     
         return(
-            
+            <div className="ReviewsPage">
+
+            {this.state.printReviews.map((review)=>
+            <Review id={review.id} username={review.user} title={review.title} 
+            rating={review.rating} timestamp={review.timestamp} content={review.content} 
+            likes={10} dislikes={0} spams={0} />
+            )}
+
             <Pagination pages={numberOfpages} nextPage={this.nextPage} currentPage={this.state.currentPage}/>
+            </div>
 
              
         )
