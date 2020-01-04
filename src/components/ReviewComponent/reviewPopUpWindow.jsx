@@ -1,20 +1,20 @@
 import React from 'react';
-import '.style.css';
+import './style.css';
 
-class Popup extends React.Component{
 
-    render(){
-        <div className='popup'>
-            <div className='popup\_inner'>
 
-                    <button>Título</button>
-                    <button onClick={this.props.closePopup}>cerrar</button>
+class reviewsPopUpWindow extends React.Component {  
 
-            </div>
-        </div>
+        render() {  
+            return (  
+                <div className='popup'>  
+                    <div className='popup\_inner'>  
+                                 <h1>Título</h1>  
+                        <button onClick={this.props.closePopup}>Cerrar</button>  
+                    </div>  
+            </div>  
+            );  
+        }  
+}  
 
-    }
-
-}
-
-export default Popup;
+export default reviewsPopUpWindow;

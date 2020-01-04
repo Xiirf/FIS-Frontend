@@ -7,6 +7,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import{faEdit as edit} from '@fortawesome/free-solid-svg-icons'
 import Col from 'react-bootstrap/Col';
 import reviewsPagination from './components/ReviewComponent/reviewsPagination.jsx';
+import PopUpApp from  './components/ReviewComponent/PopUpApp.jsx';
 
 library.add(edit);
 
@@ -35,7 +36,7 @@ library.add(edit);
                                        
                         } 
 
-                         <Col xs className="ml-4"><FontAwesomeIcon icon={"edit"} size="lg"/> Crear review de la película </Col>
+                         <Col xs className="ml-4"> <PopUpApp/> </Col>
 
                 </div>
                 
