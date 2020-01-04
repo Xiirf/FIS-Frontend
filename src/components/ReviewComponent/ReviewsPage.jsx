@@ -1,5 +1,6 @@
 import React from 'react';
 import Pagination from './Pagination.jsx';
+import Review from './Review.jsx';
 
 class ReviewsPage extends React.Component{
 
@@ -7,7 +8,8 @@ class ReviewsPage extends React.Component{
         super();
         this.state={
             currentPage:1,
-            reviews:props.reviews
+            reviews:props.reviews,
+            printReviews:[]
         }
 
     }
@@ -27,16 +29,19 @@ class ReviewsPage extends React.Component{
 
         let beginning=(5*pagenumber)-4;
         let end=5*pagenumber;
-
+        /*let j=1;
+        array=[];
         //imprimimos por pantalla las reviews de esa pagina
-        /*for(let i=beginning; i < end+1;i++){
+        for(let i=beginning; i < end+1;i++){
 
-       <div>{console.log(this.state.reviews[i])} </div>
-
-        }*/
+                array[j]=this.state.reviews[i];
+                j=j+1;
+        }
+        */
 
         
         this.setState({currentPage:pagenumber})
+        //this.setState({printReviews:array});
     }
 
     render(){
@@ -48,9 +53,12 @@ class ReviewsPage extends React.Component{
        let numberOfpages=Math.round(this.state.reviews.length/5);
     
         return(
+            
+            <Pagination pages={numberOfpages} nextPage={this.nextPage} currentPage={this.state.currentPage}/>
 
-            <Pagination pages={numberOfpages} nextPage={this.nextPage} currentPage={this.state.currentPage}/>  
-        );
+             
+        )
+           
     }
 }
 
