@@ -55,6 +55,17 @@ class MoviesApi {
             return response;
         });
     }
+
+    static deleteMovieStatus(id){
+        const headers = this.requestHeaders();
+        const request = new Request(MoviesApi.API_BASE_URL + "/movies_status/" + id,{
+            method: 'DELETE',
+            headers:  headers
+        })
+        return fetch(request).then(response => {
+            return response;
+        });
+    }
 }
 
 export default MoviesApi;

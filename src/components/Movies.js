@@ -57,7 +57,6 @@ class Movies extends React.Component {
             totalShow: 10,
             query: this.state.query
         }
-        console.log(pagination);
         return (
             <div className="container">
                 <SearchBar></SearchBar>

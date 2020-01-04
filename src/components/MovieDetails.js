@@ -71,7 +71,20 @@ class MovieDetails extends React.Component {
         "id_user": "3", //TODO - Change this for the user in te auth 
         "status": status
     };
-    if(this.state.id_status === ""){
+    if(status === "No_visto" && this.state.id_status != ""){
+        MoviesApi.deleteMovieStatus(this.state.id_status)
+        .then(
+            (result) => {
+            this.setState({success:true, error: false});
+            },
+            (error) => {
+                this.setState({
+                    error: true,
+                    success: false
+                })
+            }
+        )
+    }else if(this.state.id_status === ""){
         MoviesApi.postMovieStatus(body)
         .then(
             (result) => {
