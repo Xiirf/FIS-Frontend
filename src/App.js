@@ -21,22 +21,12 @@ library.add(edit);
         ];
         
         //si hay más de cinco reviews se realiza la paginación si no se imprimen directamente
-        //<ReviewsPage reviews={reviews} />
+
                 return (
                 <div className="App">
 
-                        {reviews.length<5 ? 
-                                        reviews.map((review)=>
-                                        <Review id={review.id} username={review.user} title={review.title} 
-                                                rating={review.rating} timestamp={review.timestamp} content={review.content} 
-                                                likes={10} dislikes={0} spams={0} />
-                                        )
+                        <ReviewsPage reviews={reviews} />
 
-                                        :  <reviewsPagination todo={reviews} todosPerPage={2} />
-                                       
-                        } 
-
-                         <Col xs className="ml-4"> <PopUpApp/> </Col>
 
                 </div>
                 

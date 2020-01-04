@@ -1,6 +1,10 @@
-import React from 'react';
+ import React from 'react';
 import Pagination from './Pagination.jsx';
 import Review from './Review.jsx';
+import Col from 'react-bootstrap/Col';
+import{Button,ButtonToolbar} from 'react-bootstrap';
+import PopUpApp from  './PopUpApp.jsx';
+import AddReview from './AddReview'
 
 class ReviewsPage extends React.Component{
 
@@ -9,7 +13,8 @@ class ReviewsPage extends React.Component{
         this.state={
             currentPage:1,
             reviews:props.reviews,
-            printReviews:[]
+            printReviews:[],
+            addReviewShow: false,
         }
 
     }
@@ -46,27 +51,53 @@ class ReviewsPage extends React.Component{
 
     render(){
 
+
          //el numero de paginas en el que se van a paginar las reviews
         //depende directamente del número de reviews.
         //number of pages: Math.round(this.state.reviews.length/5-> numero de reviews (tamaño del array)/ reviews por pagina
         //al redondear ese resultado da el numero de paginas
        let numberOfpages=Math.round(this.state.reviews.length/5);
-    
+       let addreviewClose=()=>this.setState({
+            addModalShow: false,
+        });
+
         return(
+
+        <div>
             <div className="ReviewsPage">
+                                        {this.state.reviews.length<5 ? 
 
-            {this.state.printReviews.map((review)=>
-            <Review id={review.id} username={review.user} title={review.title} 
-            rating={review.rating} timestamp={review.timestamp} content={review.content} 
-            likes={10} dislikes={0} spams={0} />
-            )}
+                                        this.state.reviews.map((review)=>
+                                        <Review id={review.id} username={review.user} title={review.title} 
+                                                rating={review.rating} timestamp={review.timestamp} content={review.content} 
+                                                likes={10} dislikes={0} spams={0} />) : ''
 
-            <Pagination pages={numberOfpages} nextPage={this.nextPage} currentPage={this.state.currentPage}/>
+                                        /*:   {this.state.printReviews.map((review)=>
+                                            <Review id={review.id} username={review.user} title={review.title} 
+                                            rating={review.rating} timestamp={review.timestamp} content={review.content} 
+                                            likes={10} dislikes={0} spams={0} />
+                                            )}
+                                
+                                            <Pagination pages={numberOfpages} nextPage={this.nextPage} currentPage={this.state.currentPage}/> }*/
+                                       
+                        } 
+
+            <ButtonToolbar>
+                <Button
+                variant='primary'
+                onClick={()=>this.setState({addReviewShow:true})}
+                >Añadir Review </Button>
+
+                <AddReview
+                show={this.state.addReviewShow}
+                    onHide={addreviewClose}/>
+
+            </ButtonToolbar>                         
             </div>
-
+         </div>
              
         )
-           
+       
     }
 }
 
