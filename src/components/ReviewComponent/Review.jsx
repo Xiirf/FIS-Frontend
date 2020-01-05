@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Rater from 'react-rater';
 
 import './review.scss';
+import DeleteReview from './DeleteReview.jsx';
 
 import moment from 'moment';
 import 'moment/locale/es';
@@ -38,7 +39,8 @@ class Review extends React.Component {
             disliked: props.disliked || false,
             likes: this.props.likes,
             dislikes: this.props.dislikes,
-            spams: this.props.spams
+            spams: this.props.spams,
+            DeleteReviewShow: false,
 
         };
 
@@ -107,6 +109,9 @@ class Review extends React.Component {
     
 
     render() {
+        let deletereviewClose=()=>this.setState({
+            DeleteReviewShow: false,
+        });
         return (
             <>
             <Card>
@@ -124,7 +129,11 @@ class Review extends React.Component {
                     <Col xs className="ml-4"><FontAwesomeIcon icon={[this.state.disliked? "fas" : "far", "thumbs-down"]} size="lg" onClick={this.toggleDislike}/> {this.state.dislikes}</Col>
                     <Col xs className="ml-4"><FontAwesomeIcon icon={[this.state.spammed? "fas" : "far", "times-circle"]} size="lg" onClick={this.toggleSpam}/> {this.state.spams}</Col>
                     <Col xs className="ml-4"><FontAwesomeIcon icon={"edit"} size="lg" onClick={this.toogleTitle}/></Col>
-                    <Col xs className="ml-4"><FontAwesomeIcon icon={"trash"} size="lg" onClick={this.toogleTitle}/></Col>
+
+                    <Col xs className="ml-4">
+                        <FontAwesomeIcon icon={"trash"} size="lg" onClick={()=>this.setState({DeleteReviewShow:true})}/>              
+                        <DeleteReview show={this.state.DeleteReviewShow} onHide={deletereviewClose}/>
+                    </Col>
                 </Row>
             </Card>
             </>
