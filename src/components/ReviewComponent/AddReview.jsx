@@ -11,7 +11,7 @@ class AddReview extends React.Component{
         event.preventDefault();
         alert(event.target.Titulo.value);
         alert(event.target.Contenido.value);
-        alert(event.target.Valoracion.value);
+        alert(event.target.Valoración.value);
         /*
         fetch('direccion/v1/reviews/imdbId',{
               
@@ -50,8 +50,9 @@ class AddReview extends React.Component{
           <div className="container">
 
               <Row>
-                <Col sm={6}>
+                <Col sm={12}>
                     <Form onSubmit={this.handleSubmit}>
+
                       <Form.Group controlId="Título">
                               <Form.Label> Título </Form.Label>
                               <Form.Control
@@ -61,18 +62,8 @@ class AddReview extends React.Component{
                                 placeholder="Título"
                               />
 
-                      </Form.Group>
-                      <Form.Group>
-                        <Button variant="primary" type="submit">
-                          Añadir título
-                        </Button>
-                      </Form.Group>
+                       </Form.Group>
 
-                  </Form>
-                </Col>
-
-                <Col sm={5}>
-                    <Form onSubmit={this.handleSubmit}>
                       <Form.Group controlId="Contenido">
                               <Form.Label> Contenido </Form.Label>
                               <Form.Control
@@ -82,17 +73,7 @@ class AddReview extends React.Component{
                                 placeholder="Contenido"
                               />
                       </Form.Group>
-                      <Form.Group>
-                        <Button variant="primary" type="submit">
-                          Añadir Contenido
-                        </Button>
-                      </Form.Group>
-                  </Form>
-                </Col>
 
-
-                <Col sm={4}>
-                    <Form onSubmit={this.handleSubmit}>
                       <Form.Group controlId="Valoración">
                               <Form.Label> Valoración </Form.Label>
                               <Form.Control
@@ -102,20 +83,23 @@ class AddReview extends React.Component{
                                 placeholder="Valoración"
                               />
                       </Form.Group>
+
+             
+
                       <Form.Group>
                         <Button variant="primary" type="submit">
-                          Añadir Valoración
+                          Añadir Review
                         </Button>
                       </Form.Group>
-                  </Form>
-                </Col>
 
+                   </Form>
+                </Col>
               </Row>
           </div>
 
       </Modal.Body>
       <Modal.Footer>  
-        <Button variant="danger" onClick={this.props.onHide}>Close</Button>
+        <Button variant="danger" onClick={this.props.onHide}>Cerrar</Button>
       </Modal.Footer>
     </Modal>
 
