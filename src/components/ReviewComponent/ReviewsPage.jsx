@@ -5,6 +5,10 @@ import Col from 'react-bootstrap/Col';
 import{Button,ButtonToolbar} from 'react-bootstrap';
 import PopUpApp from  './PopUpApp.jsx';
 import AddReview from './AddReview'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import{faEdit as edit} from '@fortawesome/free-solid-svg-icons';
+
 
 class ReviewsPage extends React.Component{
 
@@ -58,7 +62,7 @@ class ReviewsPage extends React.Component{
         //al redondear ese resultado da el numero de paginas
        let numberOfpages=Math.round(this.state.reviews.length/5);
        let addreviewClose=()=>this.setState({
-            addModalShow: false,
+            addReviewShow: false,
         });
 
         return(
@@ -78,16 +82,19 @@ class ReviewsPage extends React.Component{
                                             likes={10} dislikes={0} spams={0} />
                                             )}
                                 
-                                            <Pagination pages={numberOfpages} nextPage={this.nextPage} currentPage={this.state.currentPage}/> }*/
+                                            <Pagination pages={numberOfpages} nextPage={this.nextPage} currentPage={this.state.currentPage}/> }
+                                              <Button variant='primary'
+                                                onClick={()=>this.setState({addReviewShow:true})}
+                                                    >Añadir Review </Button>
+                                                    */
+                                             
+                        
                                        
                         } 
 
             <ButtonToolbar>
-                <Button
-                variant='primary'
-                onClick={()=>this.setState({addReviewShow:true})}
-                >Añadir Review </Button>
-
+           
+                <FontAwesomeIcon icon={"edit"} size="6x" onClick={()=>this.setState({addReviewShow:true})}/> <h1>Crear una review</h1> 
                 <AddReview
                 show={this.state.addReviewShow}
                     onHide={addreviewClose}/>

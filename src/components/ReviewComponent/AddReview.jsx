@@ -25,7 +25,7 @@ class AddReview extends React.Component{
           </div>
 
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer>  
         <Button variant="danger" onClick={this.props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
