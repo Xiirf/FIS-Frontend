@@ -139,7 +139,7 @@ class Review extends React.Component {
 
                     <Col xs className="ml-4">
                         <FontAwesomeIcon icon={"edit"} size="lg" onClick={()=>this.setState({ModifyReviewShow:true})}/>
-                        <ModifyReview show={this.state.ModifyReviewShow} onHide={modifyreviewClose}/>
+                        <ModifyReview show={this.state.ModifyReviewShow} onHide={modifyreviewClose} titulo={this.state.title} valoracion={this.state.rating} contenido={this.state.content}/>
                     </Col>
 
                     <Col xs className="ml-4">

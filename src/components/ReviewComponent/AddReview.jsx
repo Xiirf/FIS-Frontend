@@ -5,6 +5,7 @@ import Rater from 'react-rater';
 class AddReview extends React.Component{
     constructor(props){
         super(props);
+        this.handleSubmit=this.handleSubmit.bind(this);
     }
 
     handleSubmit(event){

@@ -5,6 +5,7 @@ import Rater from 'react-rater';
 class ModifyReview extends React.Component{
     constructor(props){
         super(props);
+        this.handleSubmit=this.handleSubmit.bind(this);
     }
 
     handleSubmit(event){
@@ -14,14 +15,17 @@ class ModifyReview extends React.Component{
         alert(event.target.Contenido.value);
         alert(event.target.Valoración.value);
         /*
-        fetch('direccion/v1/reviews/imdbId',{
+        fetch('direccion/v1/reviews/id',{
               
-              method:'POST',
-              headers:{'Accept':'application/json',
+              method:'PUT',
+              headers:{
+                  'Accept':'application/json',
+                  'Content-Type':'application/json'
+
             },
-            body:JSON.stringify({
-              Titulo:event.target.Titulo.value,
-              Contenido:event.target.Contenido.value,
+            body:({
+              Titulo:JSON.stringify(event.target.Titulo.value),
+              Contenido:JSON.stringify(event.target.Contenido.value),
               Valoracion:null //lo vas a tener que sacar de aquí
 
             })
@@ -60,7 +64,7 @@ class ModifyReview extends React.Component{
                               <Form.Control
                                 type="text"
                                 name="Titulo"
-                                
+                                defaultValue={this.props.titulo}
                                 placeholder="Título"
                               />
 
@@ -71,7 +75,7 @@ class ModifyReview extends React.Component{
                               <Form.Control
                                 type="text"
                                 name="Contenido"
-                            
+                                defaultValue={this.props.contenido}
                                 placeholder="Contenido"
                               />
                       </Form.Group>
@@ -81,7 +85,7 @@ class ModifyReview extends React.Component{
                               <Form.Control
                                 type="text"
                                 name="Valoración"
-                                
+                                defaultValue={this.props.valoracion}
                                 placeholder="Valoración"
                               />
                       </Form.Group>
