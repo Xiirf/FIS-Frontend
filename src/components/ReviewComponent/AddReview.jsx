@@ -1,5 +1,6 @@
 import React from 'react';
 import {Modal,Button,Row,Col,Form} from "react-bootstrap";
+import Rater from 'react-rater';
 
 class AddReview extends React.Component{
     constructor(props){
@@ -32,6 +33,7 @@ class AddReview extends React.Component{
         })
         */
     }
+
 
     render(){
         return(
@@ -83,6 +85,10 @@ class AddReview extends React.Component{
                                 placeholder="Valoración"
                               />
                       </Form.Group>
+
+                    <div className="text-left ml-4">
+                    <Rater total={5} rating={0} interactive={true}  onRate={this.handleValoracion}/>
+                    </div>
 
              
 
