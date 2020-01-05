@@ -7,9 +7,30 @@ class AddReview extends React.Component{
     }
 
     handleSubmit(event){
-      event.preventDefault();
-      alert(event.target.Titulo.value);
-      alert(event.target.Contenido.value);
+
+        event.preventDefault();
+        alert(event.target.Titulo.value);
+        alert(event.target.Contenido.value);
+        alert(event.target.Valoracion.value);
+        /*
+        fetch('direccion/v1/reviews/imdbId',{
+              
+              method:'POST',
+              headers:{'Accept':'application/json',
+            },
+            body:JSON.stringify({
+              Titulo:event.target.Titulo.value,
+              Contenido:event.target.Contenido.value,
+              Valoracion:null //lo vas a tener que sacar de aquí
+
+            })
+        }).then(res => res.json()).then((result)=>{
+
+          alert(result); //imprime el resultado
+        },(error)=>{
+          alert('Failed')
+        })
+        */
     }
 
     render(){
@@ -27,9 +48,9 @@ class AddReview extends React.Component{
       </Modal.Header>
       <Modal.Body>
           <div className="container">
+
               <Row>
                 <Col sm={6}>
-
                     <Form onSubmit={this.handleSubmit}>
                       <Form.Group controlId="Título">
                               <Form.Label> Título </Form.Label>
@@ -49,7 +70,6 @@ class AddReview extends React.Component{
 
                   </Form>
                 </Col>
-
 
                 <Col sm={5}>
                     <Form onSubmit={this.handleSubmit}>
