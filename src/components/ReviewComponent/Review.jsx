@@ -7,6 +7,7 @@ import Rater from 'react-rater';
 
 import './review.scss';
 import DeleteReview from './DeleteReview.jsx';
+import ModifyReview from './ModifyReview.jsx'
 
 import moment from 'moment';
 import 'moment/locale/es';
@@ -41,6 +42,7 @@ class Review extends React.Component {
             dislikes: this.props.dislikes,
             spams: this.props.spams,
             DeleteReviewShow: false,
+            ModifyReviewShow: false
 
         };
 
@@ -109,9 +111,15 @@ class Review extends React.Component {
     
 
     render() {
+        //functions to close the modal windows
         let deletereviewClose=()=>this.setState({
             DeleteReviewShow: false,
         });
+
+        let modifyreviewClose=()=>this.setState({
+            ModifyReviewShow: false,
+        });
+
         return (
             <>
             <Card>
@@ -128,7 +136,11 @@ class Review extends React.Component {
                     <Col xs className="ml-4"><FontAwesomeIcon icon={[this.state.liked? "fas" : "far", "thumbs-up"]} size="lg" onClick={this.toggleLike}/> {this.state.likes}</Col>
                     <Col xs className="ml-4"><FontAwesomeIcon icon={[this.state.disliked? "fas" : "far", "thumbs-down"]} size="lg" onClick={this.toggleDislike}/> {this.state.dislikes}</Col>
                     <Col xs className="ml-4"><FontAwesomeIcon icon={[this.state.spammed? "fas" : "far", "times-circle"]} size="lg" onClick={this.toggleSpam}/> {this.state.spams}</Col>
-                    <Col xs className="ml-4"><FontAwesomeIcon icon={"edit"} size="lg" onClick={this.toogleTitle}/></Col>
+
+                    <Col xs className="ml-4">
+                        <FontAwesomeIcon icon={"edit"} size="lg" onClick={()=>this.setState({ModifyReviewShow:true})}/>
+                        <ModifyReview show={this.state.ModifyReviewShow} onHide={modifyreviewClose}/>
+                    </Col>
 
                     <Col xs className="ml-4">
                         <FontAwesomeIcon icon={"trash"} size="lg" onClick={()=>this.setState({DeleteReviewShow:true})}/>              

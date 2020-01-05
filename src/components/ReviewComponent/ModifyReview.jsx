@@ -2,7 +2,7 @@ import React from 'react';
 import {Modal,Button,Row,Col,Form} from "react-bootstrap";
 import Rater from 'react-rater';
 
-class AddReview extends React.Component{
+class ModifyReview extends React.Component{
     constructor(props){
         super(props);
     }
@@ -11,9 +11,7 @@ class AddReview extends React.Component{
 
         event.preventDefault();
         alert(event.target.Titulo.value);
-
         alert(event.target.Contenido.value);
-
         alert(event.target.Valoración.value);
         /*
         fetch('direccion/v1/reviews/imdbId',{
@@ -47,7 +45,7 @@ class AddReview extends React.Component{
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Crear una review
+          Modificar la review
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -62,7 +60,7 @@ class AddReview extends React.Component{
                               <Form.Control
                                 type="text"
                                 name="Titulo"
-                                required
+                                
                                 placeholder="Título"
                               />
 
@@ -73,7 +71,7 @@ class AddReview extends React.Component{
                               <Form.Control
                                 type="text"
                                 name="Contenido"
-                                required
+                            
                                 placeholder="Contenido"
                               />
                       </Form.Group>
@@ -83,7 +81,7 @@ class AddReview extends React.Component{
                               <Form.Control
                                 type="text"
                                 name="Valoración"
-                                required
+                                
                                 placeholder="Valoración"
                               />
                       </Form.Group>
@@ -96,7 +94,7 @@ class AddReview extends React.Component{
 
                       <Form.Group>
                         <Button variant="primary" type="submit">
-                          Añadir Review
+                          Añadir cambios
                         </Button>
                       </Form.Group>
 
@@ -107,7 +105,7 @@ class AddReview extends React.Component{
 
       </Modal.Body>
       <Modal.Footer>  
-        <Button variant="danger" onClick={this.props.onHide}>Cerrar</Button>
+        <Button variant="danger" onClick={this.props.onHide}>Cancelar</Button>
       </Modal.Footer>
     </Modal>
 
@@ -115,7 +113,6 @@ class AddReview extends React.Component{
         );
     }
 
-
-
 }
-export default AddReview
+
+export default ModifyReview
