@@ -8,21 +8,20 @@ class DeleteReview extends React.Component{
         this.handleSubmit=this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event){
+    handleSubmit(event){ //será necesario que pongas this.props.id
 
         event.preventDefault();
         alert('Borrada');
         /*
-        fetch('direccion/v1/reviews/imdbId',{
+        fetch('direccion/v1/reviews/'+this.props.id,{
               
-              method:'POST',
-              headers:{'Accept':'application/json',
+              method:'DELETE',
+              headers:{
+                  'Accept':'application/json',
+                   'Content-Type':application/json'
             },
             body:JSON.stringify({
-              Titulo:event.target.Titulo.value,
-              Contenido:event.target.Contenido.value,
-              Valoracion:null //lo vas a tener que sacar de aquí
-
+              id:this.props.id
             })
         }).then(res => res.json()).then((result)=>{
 

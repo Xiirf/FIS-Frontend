@@ -31,7 +31,7 @@ class Review extends React.Component {
         super(props);
         
         this.state = {
-
+            id:props.id,
             title:props.title,
             content:props.content,
             rating:props.rating,
