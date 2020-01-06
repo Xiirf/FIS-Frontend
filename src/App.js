@@ -59,7 +59,7 @@ class App extends React.Component {
                             {
                                 currentToken ? 
                                     <div className="navbar-nav ml-auto">
-                                        <Link to="/listaNoRecomendadas" className="nav-item nav-link">No recomendadas</Link>
+                                        <Link to="/listaNoRecomendadas" className="nav-item nav-link" title="Películas y Series no recomedadas">No recomendadas</Link>
                                     </div>
                                     :
                                     <div></div>                                

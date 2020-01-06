@@ -149,10 +149,11 @@ class ListaNegraRecomendaciones extends React.Component{
 
         return (
                 <div id="lista_negra_table">                 
-                    <h3>Lista de películas no recomendadas:</h3>
-                    <table className="table">
+                    <h4 className="tituloListaNoRecomendada">Lista de películas no recomendadas</h4>
+                    <table className="table table-sm table-hover">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Id Pelicula</th>
                                 <th>Nombre Pelicula</th>
                                 <th></th>
@@ -160,8 +161,8 @@ class ListaNegraRecomendaciones extends React.Component{
                             </tr>
                         </thead>
 
-                        {this.state.peliculasNR.map((peli) => 
-                                <ListaNegra key = {peli.idTmdb} elemento = {peli} tipo = "1" deleteFromListaNegra={this.handleDeleteListaNegra}/>
+                        {this.state.peliculasNR.map((peli, index) => 
+                                <ListaNegra key = {peli.idTmdb} indice={index} elemento = {peli} tipo = "1" deleteFromListaNegra={this.handleDeleteListaNegra}/>
                             )
                         }
 
@@ -169,10 +170,11 @@ class ListaNegraRecomendaciones extends React.Component{
 
                     <hr></hr>
                     
-                    <h3>Lista de series no recomendadas:</h3>
-                    <table className="table">
+                    <h4 className="tituloListaNoRecomendada">Lista de series no recomendadas</h4>
+                    <table className="table table-sm table-hover">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Id Serie</th>
                                 <th>Nombre Serie</th>
                                 <th></th>
@@ -180,8 +182,8 @@ class ListaNegraRecomendaciones extends React.Component{
                             </tr>
                         </thead>
 
-                        {this.state.seriesNR.map((serie) => 
-                                <ListaNegra key = {serie.idTmdb} elemento = {serie} tipo = "2" deleteFromListaNegra={this.handleDeleteListaNegra}/>
+                        {this.state.seriesNR.map((serie, index) => 
+                                <ListaNegra key = {serie.idTmdb} indice={index} elemento = {serie} tipo = "2" deleteFromListaNegra={this.handleDeleteListaNegra}/>
                             )
                         }
 
