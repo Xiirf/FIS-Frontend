@@ -10,8 +10,12 @@ import Signin from './authentication/Signin';
 import Signup from './authentication/Signup';
 import Myaccount from './authentication/Myaccount';
 
+import Movies from './components/Movies';
+import MovieDetails from './components/MovieDetails';
+
 import { history } from './_helpers/history';
 import { authenticationService } from './_services/authentication.service';
+import SearchBar from './components/Searchbar';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -70,6 +74,9 @@ class App extends React.Component {
                                     <div></div>                                
                             }
                         </div>
+                        <div className="ml-auto mr-4">
+                                <SearchBar></SearchBar>
+                        </div>
                     </nav>
                     <div className="jumbotron">
                         <div className="container">
@@ -79,6 +86,8 @@ class App extends React.Component {
                                     <Route exact path="/listaNoRecomendadas" component={ListaNoRecomendadas} />
                                     <Route exact path="/signin" component={Signin} />
                                     <Route exact path="/signup" component={Signup} />
+                                    <Route exact path="/search" component={Movies}></Route>
+                                    <Route exact path="/movie/:filter" component={MovieDetails}></Route>
                                     <PrivateRoute exact path="/myaccount" component={Myaccount} />
                                 {/* </div> */}
                             </div>
