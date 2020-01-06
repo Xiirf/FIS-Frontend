@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { PrivateRoute } from './PrivateRoute';
 import Home from './pages/Home';
+import ListaNoRecomendadas from './pages/ListaNoRecomendadas';
 import Signin from './authentication/Signin';
 import Signup from './authentication/Signup';
 import Myaccount from './authentication/Myaccount';
@@ -14,8 +15,6 @@ import { authenticationService } from './_services/authentication.service';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Recomendaciones from './Recomendaciones';
-import ListaNegraRecomendaciones from './ListaNegraRecomendaciones';
 
 class App extends React.Component {
     constructor(props) {
@@ -43,19 +42,27 @@ class App extends React.Component {
             <Router history={history}>
                 <div>
                     <nav className="navbar navbar-expand navbar-dark bg-dark">
-                        <div className="navbar-nav">
+                        <div className="navbar-nav" style={{width:"100%"}}>
                             <Link to="/" className="nav-item nav-link">Inicio</Link>
                             {
                                 currentToken ? 
                                     <div className="navbar-nav">
                                         <Link to="/myaccount" className="nav-item nav-link">Mi cuenta</Link>
-                                        <a onClick={this.logout} className="nav-item nav-link">Cierre de sesión</a>
+                                        <a onClick={this.logout} className="nav-item nav-link">Cierre de sesión</a>                                        
                                     </div>
                                     : 
                                     <div className="navbar-nav">
                                         <Link to="/signin" className="nav-item nav-link">Ingresar</Link>
                                         <Link to="/signup" className="nav-item nav-link">Inscribirse</Link>
                                     </div>
+                            }
+                            {
+                                currentToken ? 
+                                    <div className="navbar-nav ml-auto">
+                                        <Link to="/listaNoRecomendadas" className="nav-item nav-link">No recomendadas</Link>
+                                    </div>
+                                    :
+                                    <div></div>                                
                             }
                         </div>
                     </nav>
@@ -64,6 +71,7 @@ class App extends React.Component {
                             <div className="row">
                                 <div className="col-md-6 offset-md-3">
                                     <Route exact path="/" component={Home} />
+                                    <Route exact path="/listaNoRecomendadas" component={ListaNoRecomendadas} />
                                     <Route exact path="/signin" component={Signin} />
                                     <Route exact path="/signup" component={Signup} />
                                     <PrivateRoute exact path="/myaccount" component={Myaccount} />

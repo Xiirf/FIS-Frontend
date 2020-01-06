@@ -40,9 +40,9 @@ class Home extends React.Component {
                 <Recomendaciones tipoRecomendacion="2" categoria="1" idRecomendacion="tt0816692" visibleSlides="2" number="10"/>
                 <Recomendaciones tipoRecomendacion="2" categoria="2" idRecomendacion="tt0903747" visibleSlides="2" number="10"/>
 
-                <hr></hr>
+                {/* <hr></hr>
                 <h3>Listas no recomendadas</h3>
-                <ListaNegraRecomendaciones />
+                <ListaNegraRecomendaciones /> */}
 
             </div>
         );
