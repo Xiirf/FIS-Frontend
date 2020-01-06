@@ -16,8 +16,6 @@ class Home extends React.Component {
         return (
             <div>
                 <h1>Bienvenido !</h1>
-                <Reviews/>
-
             </div>
         );
     }

@@ -1,13 +1,50 @@
+import { authHeader } from '../_helpers/auth-header';
 import { handleResponse } from '../_helpers/handle-response';
 
 export const reviewService = {
     createImpression,
-    getReviews
+    getReviews,
+    createReview,
+    deleteReview
 };
 
-function getReviews(limit, skip) {
+const REVIEW_API_URL = 'http://localhost:3000/v1';
+
+function getReviews(resource, limit, skip) {
     const requestOptions = { method: 'GET' };
-    return fetch(`http://localhost:3000/v1/reviews?limit=${limit}&skip=${skip}`, requestOptions).then(handleResponse);
+    return fetch(`http://localhost:3000/v1/reviews?limit=${limit}&skip=${skip}&imdbId=${resource}`, requestOptions).then(handleResponse);
+}
+
+function createReview(imdbId, rating, title, content) {
+
+    const headers = authHeader();
+    headers['Content-Type'] = 'application/json';
+
+    const requestOptions = {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({
+            imdbId: imdbId.toString(),
+            rating: rating.toString(),
+            title,
+            content
+        })
+    };
+    return fetch(`${REVIEW_API_URL}/reviews`, requestOptions).then(handleResponse);
+}
+
+function deleteReview(reviewId) {
+    const headers = authHeader();
+    headers['Content-Type'] = 'application/json';
+
+    const requestOptions = {
+        method: 'DELETE',
+        headers: headers,
+        body: JSON.stringify({
+            id: reviewId
+        })
+    };
+    return fetch(`${REVIEW_API_URL}/reviews`, requestOptions).then(handleResponse);
 }
 
 function createImpression(reviewId, value) {

@@ -3,6 +3,7 @@ import MoviesApi from './MoviesApi';
 import SearchBarApi from './SearchBarApi';
 import { Alert } from 'react-bootstrap';
 import {userService} from '../_services/user.service';
+import Reviews from './Reviews/Reviews';
 
 class MovieDetails extends React.Component {
 
@@ -67,7 +68,7 @@ class MovieDetails extends React.Component {
                 }
             )
         });
-        
+        //this.refs.Reviews.refreshReviewsHandler();
       }
 
     handleStatusChange(event){
@@ -181,6 +182,7 @@ class MovieDetails extends React.Component {
                         
                     </div>
                 </div>
+               <Reviews resourceId={movie.id} user={this.state.user.login}/>
             </div>
         );
     }

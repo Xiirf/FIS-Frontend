@@ -4,6 +4,9 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Rater from 'react-rater';
+import Button from 'react-bootstrap/Button';
+
+import { reviewService } from '../../_services/review.service';
 
 import './review.scss';
 
@@ -34,9 +37,11 @@ class Review extends React.Component {
             spams: this.props.spams
         };
 
-        this.toggleLike= this.toggleLike.bind(this);
-        this.toggleDislike= this.toggleDislike.bind(this);
-        this.toggleSpam= this.toggleSpam.bind(this);
+        this.toggleLike = this.toggleLike.bind(this);
+        this.toggleDislike = this.toggleDislike.bind(this);
+        this.toggleSpam = this.toggleSpam.bind(this);
+
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -82,6 +87,13 @@ class Review extends React.Component {
         }
     }
 
+    handleDelete() {
+        reviewService.deleteReview(this.props.id).then((response) => {
+            alert(response.msg);
+            this.props.action(this.props.imdbId);
+        });
+    }
+
     render() {
         return (
             <>
@@ -100,6 +112,16 @@ class Review extends React.Component {
                     <Col xs className="ml-4"><FontAwesomeIcon icon={[this.state.disliked? "fas" : "far", "thumbs-down"]} size="lg" onClick={this.toggleDislike}/> {this.state.dislikes}</Col>
                     <Col xs className="ml-4"><FontAwesomeIcon icon={[this.state.spammed? "fas" : "far", "times-circle"]} size="lg" onClick={this.toggleSpam}/> {this.state.spams}</Col>
                 </Row>
+                {   this.props.owner ? 
+                    (<Card.Footer>
+                        <Row>
+                            <Col>
+                                <Button onClick={this.handleDelete} variant="outline-danger">Borrar</Button>
+                            </Col>
+                        </Row>
+                    </Card.Footer>) : (<></>)
+
+                }
             </Card>
             </>
         );
