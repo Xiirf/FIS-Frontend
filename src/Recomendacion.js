@@ -34,6 +34,16 @@ class Recomendacion extends React.Component{
             overviewRecomendacion = "No está disponible actualmente...";
         }
 
+        var resumenOverviewRecomendacion = "";
+        if (overview.length > 50) {
+            resumenOverviewRecomendacion = overview.substring(0,50);
+            resumenOverviewRecomendacion = resumenOverviewRecomendacion + "...";
+        } else if (overview.length == 0 || overview.length == undefined){
+            resumenOverviewRecomendacion = "No está disponible actualmente..."
+        } else {
+            resumenOverviewRecomendacion = overview;
+        }
+
         // las series no tienen fecha de publicacion
         let fechaPubli;        
         if (this.state.recomendacion.release_date) {
@@ -98,7 +108,7 @@ class Recomendacion extends React.Component{
             //eliminar la ultima ,
             generos = generos.substring(0,generos.length - 2);
 
-            if (generos.length > 20) {
+            if (generos.length > 15) {
                 generosTrimmed = generos.substring(0,15);
                 generosTrimmed = generosTrimmed + "...";
             } else {
@@ -126,10 +136,13 @@ class Recomendacion extends React.Component{
                         {/* <span>{this.state.recomendacion.id}</span> */}
 
                         <p className="tituloRecomendacion" title={tituloRecomendacion}>
-                            {tituloRecomendacion}
-                        </p>                        
+                            {tituloRecomendacion} 
+                        </p>     
 
-                        <hr></hr>
+                        <p className="resumenOverview">{resumenOverviewRecomendacion}<span className="verMasOverview">ver más</span></p>                   
+
+                        <hr className="divider"></hr>
+
                         <table>
                             <tbody>
                                 <tr>

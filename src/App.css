@@ -44,6 +44,19 @@
   font-weight: bold;
 }
 
+.resumenOverview{
+  font-size: small;
+  font-style: italic;
+  margin-top: -15px;
+  padding-left: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.verMasOverview {
+  color: blue;
+  cursor: pointer;
+}
+
 .generos {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -89,3 +102,8 @@
 .boton_lista_negra {
   position: absolute;
 }
+
+hr.divider { 
+  margin: 0.1em;
+  border-width: 2px;
+} 

@@ -174,7 +174,7 @@ class ListaNegraRecomendaciones extends React.Component{
                         <thead>
                             <tr>
                                 <th>Id Serie</th>
-                                {/* <th>Nombre Serie</th> */}
+                                <th>Nombre Serie</th>
                                 <th></th>
                                 {/* <th>Tipo</th> */}
                             </tr>
