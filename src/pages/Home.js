@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { authenticationService } from '../_services/authentication.service';
+import Reviews from '../components/Reviews/Reviews';
 
 class Home extends React.Component {
     constructor(props) {
@@ -15,6 +16,8 @@ class Home extends React.Component {
         return (
             <div>
                 <h1>Bienvenido !</h1>
+                <Reviews/>
+
             </div>
         );
     }

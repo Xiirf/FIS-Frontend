@@ -85,7 +85,7 @@ class Review extends React.Component {
     render() {
         return (
             <>
-            <Card>
+            <Card className="mt-2 mb-2 ml-2 mr-2">
                 <Row className="mt-4">
                     <Col className="text-left ml-4"><Card.Subtitle className="text-muted">{this.props.username}</Card.Subtitle></Col>
                     <Col className="text-right mr-4"><Card.Subtitle className="text-muted">{moment(this.props.timestamp).fromNow()}</Card.Subtitle></Col>
@@ -95,7 +95,7 @@ class Review extends React.Component {
                     <Rater total={5} rating={this.props.rating} interactive={false}/>
                 </div>
                 <Card.Body className="text-left ml-4">{this.props.content}</Card.Body>
-                <Row className="mr-4 mb-3 mt-3">
+                <Row className="text-center mr-4 mb-3 mt-3">
                     <Col xs className="ml-4"><FontAwesomeIcon icon={[this.state.liked? "fas" : "far", "thumbs-up"]} size="lg" onClick={this.toggleLike}/> {this.state.likes}</Col>
                     <Col xs className="ml-4"><FontAwesomeIcon icon={[this.state.disliked? "fas" : "far", "thumbs-down"]} size="lg" onClick={this.toggleDislike}/> {this.state.dislikes}</Col>
                     <Col xs className="ml-4"><FontAwesomeIcon icon={[this.state.spammed? "fas" : "far", "times-circle"]} size="lg" onClick={this.toggleSpam}/> {this.state.spams}</Col>
