@@ -61,6 +61,10 @@ class Recomendaciones extends React.Component{
 
         //window.alert("url_api: " + url_api);
         var number = this.state.number;
+        //window.alert("number recomendacion por parametro: " + number);
+        if (number !== "" && number !== undefined){
+            url_api = url_api + '?number=' + number;
+        }
 
         //fetch('https://api.themoviedb.org/3/movie/popular?api_key=18268e82edbd92497a6d18853ddf8c57&language=es-ES')
         //fetch('http://localhost:3000/recomendador/aleatorio/peliculas')
