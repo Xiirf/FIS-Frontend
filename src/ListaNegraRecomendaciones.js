@@ -1,6 +1,7 @@
 import React from 'react';
 import { Ring } from 'react-awesome-spinners';
 import ListaNegra from './ListaNegra.js';
+import {authenticationService} from './_services/authentication.service';
 
 let test_token = process.env.REACT_APP_TEST_TOKEN;
 
@@ -33,14 +34,16 @@ class ListaNegraRecomendaciones extends React.Component{
                 method: 'GET', // or 'PUT'
                 headers:{
                   'Content-Type': 'application/json',
-                  'authorization' : test_token
+                  //'authorization' : test_token,
+                  'authorization': authenticationService.currentTokenValue.token
                 }
             }),
             fetch(urlListaNegraSeries, {
                 method: 'GET', // or 'PUT'
                 headers:{
                   'Content-Type': 'application/json',
-                  'authorization' : test_token
+                  //'authorization' : test_token,
+                  'authorization': authenticationService.currentTokenValue.token
                 }
             })
         ])
@@ -91,7 +94,8 @@ class ListaNegraRecomendaciones extends React.Component{
             //body: JSON.stringify(data), // data can be `string` or {object}!
             headers:{
               'Content-Type': 'application/json',
-              'authorization' : test_token
+              //'authorization' : test_token,
+              'authorization': authenticationService.currentTokenValue.token
             }
           }).then(res => res.json())          
           .then(response => {
@@ -119,7 +123,8 @@ class ListaNegraRecomendaciones extends React.Component{
             //body: JSON.stringify(data), // data can be `string` or {object}!
             headers:{
               'Content-Type': 'application/json',
-              'authorization' : test_token
+              //'authorization' : test_token,
+              'authorization': authenticationService.currentTokenValue.token
             }
           }).then(res => res.json())
           .catch(error => window.alert('Error:', error))

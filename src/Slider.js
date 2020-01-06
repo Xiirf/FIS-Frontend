@@ -1,6 +1,7 @@
 import React from 'react';
 import Recomendacion from './Recomendacion';
 import Whirligig from 'react-whirligig';
+import {authenticationService} from './_services/authentication.service';
 
 let test_token = process.env.REACT_APP_TEST_TOKEN;
 
@@ -66,7 +67,8 @@ class Slider extends React.Component{
             //body: JSON.stringify(data), // data can be `string` or {object}!
             headers:{
               'Content-Type': 'application/json',
-              'authorization' : test_token
+              //'authorization' : test_token,
+              'authorization': authenticationService.currentTokenValue.token
             }
           }).then(res => res.json())          
           .then(response => {
@@ -92,7 +94,8 @@ class Slider extends React.Component{
             //body: JSON.stringify(data), // data can be `string` or {object}!
             headers:{
               'Content-Type': 'application/json',
-              'authorization' : test_token
+              //'authorization' : test_token,
+              'authorization': authenticationService.currentTokenValue.token
             }
           }).then(res => res.json())
           .catch(error => window.alert('Error:', error))

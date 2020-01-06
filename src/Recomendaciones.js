@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from './Slider';
 import { Ring } from 'react-awesome-spinners';
+import {authenticationService} from './_services/authentication.service';
 
 let test_token = process.env.REACT_APP_TEST_TOKEN;
 
@@ -72,7 +73,8 @@ class Recomendaciones extends React.Component{
             method: 'GET', // or 'PUT'
             headers:{
               'Content-Type': 'application/json',
-              'authorization' : test_token
+              //'authorization' : test_token,
+              'authorization': authenticationService.currentTokenValue.token
             },
             qs : {
                 number : number
