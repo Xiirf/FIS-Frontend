@@ -113,3 +113,7 @@ hr.divider {
   padding: 0.3em;
   border-radius: 4px;
 }
+
+.homeStyle{
+  max-width: 100%;
+}

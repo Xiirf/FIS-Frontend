@@ -74,13 +74,13 @@ class App extends React.Component {
                     <div className="jumbotron">
                         <div className="container">
                             <div className="row">
-                                <div className="col-md-6 offset-md-3">
+                                {/* <div className="col-md-6 offset-md-3"> */}
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/listaNoRecomendadas" component={ListaNoRecomendadas} />
                                     <Route exact path="/signin" component={Signin} />
                                     <Route exact path="/signup" component={Signup} />
                                     <PrivateRoute exact path="/myaccount" component={Myaccount} />
-                                </div>
+                                {/* </div> */}
                             </div>
                         </div>
                     </div>

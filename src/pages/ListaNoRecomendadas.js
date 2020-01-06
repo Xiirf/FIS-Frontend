@@ -14,7 +14,7 @@ class ListaNoRecomendadas extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{minWidth:"100%"}}>
                 
                 <ListaNegraRecomendaciones />
 
