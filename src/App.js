@@ -15,6 +15,8 @@ import { authenticationService } from './_services/authentication.service';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faListAlt } from '@fortawesome/free-solid-svg-icons';
 
 class App extends React.Component {
     constructor(props) {
@@ -59,7 +61,10 @@ class App extends React.Component {
                             {
                                 currentToken ? 
                                     <div className="navbar-nav ml-auto">
-                                        <Link to="/listaNoRecomendadas" className="nav-item nav-link" title="Películas y Series no recomedadas">No recomendadas</Link>
+                                        <Link to="/listaNoRecomendadas" className="nav-item nav-link" title="Películas y Series no recomedadas">
+                                            {/* <i className="fas fa-list-alt"></i> */}
+                                            <FontAwesomeIcon icon={faListAlt} size="2x"/>
+                                        </Link>
                                     </div>
                                     :
                                     <div></div>                                

@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-solid-svg-icons": "^5.12.0",
+    "@fortawesome/react-fontawesome": "^0.1.8",
     "@material-ui/core": "^4.8.1",
     "bootstrap": "^4.4.1",
     "formik": "^2.0.8",
@@ -11,12 +15,12 @@
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
     "react-flippy": "^0.1.5",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
+    "react-toastify": "^5.5.0",
     "react-whirligig": "^6.5.14",
     "styled-components": "^4.4.1",
     "whirligig": "^1.0.0",
-    "react-router-dom": "^5.1.2",
-    "react-toastify": "^5.5.0",
     "yup": "^0.28.0"
   },
   "scripts": {
