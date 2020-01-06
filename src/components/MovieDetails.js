@@ -18,7 +18,7 @@ class MovieDetails extends React.Component {
                 error: false,
                 id_status: "",
                 status: "",
-                loggued:true,
+                loggued:false,
                 movie: {}
         }
         console.log("Montado");
@@ -41,7 +41,10 @@ class MovieDetails extends React.Component {
                 }
             );
         userService.getUser().then(user => {
-            this.setState({user:user});
+            this.setState({
+                user:user,
+                loggued:true
+            });
             MoviesApi.getMovieStatusByUserAndMovie(this.state.user.login, this.id_movie)
             .then(
                 (result) => {
