@@ -15,7 +15,8 @@ class Recomendaciones extends React.Component{
             categoria : this.props.categoria, // 1 -> peliculas, 2 -> series
             idRecomendacion : this.props.idRecomendacion,
             titulo : "",
-            visibleSlides : this.props.visibleSlides // numero de recomendaciones visibles en el scroll
+            visibleSlides : this.props.visibleSlides, // numero de recomendaciones visibles en el scroll
+            number : this.props.number // numero de recomendaciones a devolver, por defecto son 5
         };
     }    
     
@@ -56,10 +57,11 @@ class Recomendaciones extends React.Component{
                 url_api = url_api + 'aleatorio/series'; 
                 this.setState({ titulo : 'Series aleatorias recomendadas' });
             }
-        }
+        }        
 
         //window.alert("url_api: " + url_api);
-                
+        var number = this.state.number;
+
         //fetch('https://api.themoviedb.org/3/movie/popular?api_key=18268e82edbd92497a6d18853ddf8c57&language=es-ES')
         //fetch('http://localhost:3000/recomendador/aleatorio/peliculas')
         fetch(url_api, {
@@ -67,6 +69,9 @@ class Recomendaciones extends React.Component{
             headers:{
               'Content-Type': 'application/json',
               'authorization' : test_token
+            },
+            qs : {
+                number : number
             }
         })
         .then(response => response.json())

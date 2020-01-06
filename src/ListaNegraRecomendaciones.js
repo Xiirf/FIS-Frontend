@@ -154,7 +154,7 @@ class ListaNegraRecomendaciones extends React.Component{
                         <thead>
                             <tr>
                                 <th>Id Pelicula</th>
-                                {/* <th>Nombre Pelicula</th> */}
+                                <th>Nombre Pelicula</th>
                                 <th></th>
                                 {/* <th>Tipo</th> */}
                             </tr>
