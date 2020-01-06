@@ -64,19 +64,22 @@ class App extends React.Component {
                             }
                             {
                                 currentToken ? 
+                                    
                                     <div className="navbar-nav ml-auto">
-                                        <Link to="/listaNoRecomendadas" className="nav-item nav-link" title="Películas y Series no recomedadas">
+                                        <SearchBar className="ml-auto mr-4"></SearchBar>
+                                        <Link to="/listaNoRecomendadas" className="nav-item nav-link link-lista-no-recomendada" title="Películas y Series no recomedadas">
                                             {/* <i className="fas fa-list-alt"></i> */}
                                             <FontAwesomeIcon icon={faListAlt} size="2x"/>
                                         </Link>
+                                        
                                     </div>
                                     :
                                     <div></div>                                
                             }
                         </div>
-                        <div className="ml-auto mr-4">
+                        {/* <div className="ml-auto mr-4">
                                 <SearchBar></SearchBar>
-                        </div>
+                        </div> */}
                     </nav>
                     <div className="jumbotron">
                         <div className="container">
