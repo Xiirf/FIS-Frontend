@@ -121,3 +121,11 @@ hr.divider {
 .link-lista-no-recomendada{
   margin-left: 1em;
 }
+
+.whirligig{
+  justify-content: inherit !important;
+}
+
+.whirligigCard{
+  width: 15em !important;
+}
