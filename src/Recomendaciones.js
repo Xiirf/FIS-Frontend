@@ -69,19 +69,21 @@ class Recomendaciones extends React.Component{
 
         //fetch('https://api.themoviedb.org/3/movie/popular?api_key=18268e82edbd92497a6d18853ddf8c57&language=es-ES')
         //fetch('http://localhost:3000/recomendador/aleatorio/peliculas')
-        fetch(url_api, {
-            method: 'GET', // or 'PUT'
-            headers:{
-              'Content-Type': 'application/json',
-              //'authorization' : test_token,
-              'authorization': authenticationService.currentTokenValue.token
-            },
-            qs : {
-                number : number
-            }
-        })
-        .then(response => response.json())
-        .then(data => this.setState({ recomendaciones: data.results, isLoading: false }));
+        if(authenticationService.currentTokenValue !== null){
+            fetch(url_api, {
+                method: 'GET', // or 'PUT'
+                headers:{
+                  'Content-Type': 'application/json',
+                  //'authorization' : test_token,
+                  'authorization': authenticationService.currentTokenValue.token
+                },
+                qs : {
+                    number : number
+                }
+            })
+            .then(response => response.json())
+            .then(data => this.setState({ recomendaciones: data.results, isLoading: false }));
+        }
     }        
 
     render(){
