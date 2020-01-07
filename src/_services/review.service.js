@@ -5,6 +5,7 @@ export const reviewService = {
     createImpression,
     getReviews,
     createReview,
+    updateReview,
     deleteReview
 };
 
@@ -33,6 +34,24 @@ function createReview(imdbId, rating, title, content) {
     return fetch(`${REVIEW_API_URL}/reviews`, requestOptions).then(handleResponse);
 }
 
+function updateReview(reviewId, rating, title, content) {
+
+    const headers = authHeader();
+    headers['Content-Type'] = 'application/json';
+
+    const requestOptions = {
+        method: 'PUT',
+        headers: headers,
+        body: JSON.stringify({
+            id: reviewId.toString(),
+            rating,
+            title,
+            content
+        })
+    };
+    return fetch(`${REVIEW_API_URL}/reviews`, requestOptions).then(handleResponse);
+}
+
 function deleteReview(reviewId) {
     const headers = authHeader();
     headers['Content-Type'] = 'application/json';
@@ -47,17 +66,14 @@ function deleteReview(reviewId) {
     return fetch(`${REVIEW_API_URL}/reviews`, requestOptions).then(handleResponse);
 }
 
-function createImpression(reviewId, value) {
-    let token = localStorage.getItem('token'); // Until authorization is well defined
+function createImpression(review, value) {
+    const headers = authHeader();
+    headers['Content-Type'] = 'application/json';
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` },
-        body: JSON.stringify({reviewId, value})
+        headers: headers,
+        body: JSON.stringify({review, value})
     };
 
-    return fetch(`${process.env.REVIEW_API_URL}/v1/impressions`, requestOptions).then((res) => {
-        console.log(res);
-        return res;
-    });
+    return fetch(`${REVIEW_API_URL}/impressions`, requestOptions).then(handleResponse);
 }

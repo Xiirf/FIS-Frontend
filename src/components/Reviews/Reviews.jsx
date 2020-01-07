@@ -71,11 +71,6 @@ class Reviews extends React.Component {
     }
 
     render() {
-        //functions to close the modal windows
-        let deletereviewClose=()=>this.setState({
-            modalShow: false,
-        });
-
         return (
             <Card>
                 <ReviewModal show={this.state.modalShow} onHide={this.toggleModal} resourceId={this.props.resourceId} action={this.handleChildFunc} />
@@ -110,7 +105,7 @@ class Reviews extends React.Component {
                          spams={review.impressions.spam}
                          timestamp={review.created}
                          imdbId={this.props.resourceId}
-                         owner={this.props.user == review.user} action={this.handleChildFunc}></Review>
+                         owner={this.props.user == review.user} action={this.handleChildFunc} ></Review>
                     ))
                 }
                 {

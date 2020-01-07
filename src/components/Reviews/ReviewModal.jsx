@@ -7,7 +7,7 @@ class ReviewModal extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            rating: 0
+            rating: this.props.rating || 0
         }
 
         this.handleValoracion=this.handleValoracion.bind(this);
@@ -18,10 +18,18 @@ class ReviewModal extends React.Component{
 
         event.preventDefault();
         if (localStorage.getItem("currentToken")) {
-            reviewService.createReview(this.props.resourceId, this.state.rating, event.target.Titulo.value, event.target.Contenido.value).then((response) => {
-                alert(response.msg);
-                this.props.action(this.props.resourceId);
+          if(this.props.reviewId) {
+            reviewService.updateReview(this.props.reviewId, this.state.rating, event.target.Titulo.value, event.target.Contenido.value).then((response) => {
+              alert(response.msg);
+              window.location.reload();
             });
+          } else {
+            reviewService.createReview(this.props.resourceId, this.state.rating, event.target.Titulo.value, event.target.Contenido.value).then((response) => {
+              alert(response.msg);
+              this.props.action(this.props.resourceId);
+            });
+          }
+            
         } else {
             alert("Debes haber iniciado sesión primero!");
         }
@@ -66,7 +74,7 @@ class ReviewModal extends React.Component{
                               <Form.Control
                                 type="text"
                                 name="Titulo"
-                                defaultValue={this.props.titulo}
+                                defaultValue={this.props.title}
                                 placeholder="Título"
                               />
 
@@ -77,7 +85,7 @@ class ReviewModal extends React.Component{
                               <Form.Control
                                 type="text"
                                 name="Contenido"
-                                defaultValue={this.props.contenido}
+                                defaultValue={this.props.content}
                                 placeholder="Contenido"
                               />
                       </Form.Group>

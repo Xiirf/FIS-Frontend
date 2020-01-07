@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Rater from 'react-rater';
 import Button from 'react-bootstrap/Button';
+import ReviewModal from '../Reviews/ReviewModal';
+
 
 import { reviewService } from '../../_services/review.service';
 
@@ -34,7 +36,8 @@ class Review extends React.Component {
             disliked: props.disliked || false,
             likes: this.props.likes,
             dislikes: this.props.dislikes,
-            spams: this.props.spams
+            spams: this.props.spams,
+            showModal: false
         };
 
         this.toggleLike = this.toggleLike.bind(this);
@@ -42,49 +45,64 @@ class Review extends React.Component {
         this.toggleSpam = this.toggleSpam.bind(this);
 
         this.handleDelete = this.handleDelete.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+
     }
 
     componentDidMount() {
         
     }
 
+    toggleModal() {
+        this.setState({
+            modalShow: !this.state.modalShow,
+        });
+    }
+
     toggleLike() {
-        if (!this.state.liked) {
-            this.setState(state => ({
-                liked: true,
-                disliked: false,
-                spammed: false,
-                likes: this.state.likes + 1,
-                dislikes: this.state.disliked ? this.state.dislikes - 1 : this.state.dislikes,
-                spams: this.state.spammed ? this.state.spams - 1 : this.state.spams,
-            }));
-        }
+        reviewService.createImpression(this.props.id,'like').then(() => {
+            if (!this.state.liked) {
+                this.setState(state => ({
+                    liked: true,
+                    disliked: false,
+                    spammed: false,
+                    likes: this.state.likes + 1,
+                    dislikes: this.state.disliked ? this.state.dislikes - 1 : this.state.dislikes,
+                    spams: this.state.spammed ? this.state.spams - 1 : this.state.spams,
+                }));
+            }
+        });
     }
 
     toggleDislike() {
-        if (!this.state.disliked) {
-            this.setState(state => ({
-                liked: false,
-                disliked: true,
-                spammed: false,
-                dislikes: this.state.dislikes + 1,
-                likes: this.state.liked ? this.state.likes - 1 : this.state.likes,
-                spams: this.state.spammed ? this.state.spams - 1 : this.state.spams,
-            }));
-        }
+        reviewService.createImpression(this.props.id,'dislike').then(() => {
+            if (!this.state.disliked) {
+                this.setState(state => ({
+                    liked: false,
+                    disliked: true,
+                    spammed: false,
+                    dislikes: this.state.dislikes + 1,
+                    likes: this.state.liked ? this.state.likes - 1 : this.state.likes,
+                    spams: this.state.spammed ? this.state.spams - 1 : this.state.spams,
+                }));
+            }
+        });
+        
     }
 
     toggleSpam() {
-        if (!this.state.spammed) {
-            this.setState(state => ({
-                liked: false,
-                disliked: false,
-                spammed: true,
-                spams: this.state.spams + 1,
-                likes: this.state.liked ? this.state.likes - 1 : this.state.likes,
-                dislikes: this.state.disliked ? this.state.dislikes - 1 : this.state.dislikes,
-            }));
-        }
+        reviewService.createImpression(this.props.id,'spam').then(() => {
+            if (!this.state.spammed) {
+                this.setState(state => ({
+                    liked: false,
+                    disliked: false,
+                    spammed: true,
+                    spams: this.state.spams + 1,
+                    likes: this.state.liked ? this.state.likes - 1 : this.state.likes,
+                    dislikes: this.state.disliked ? this.state.dislikes - 1 : this.state.dislikes,
+                }));
+            }
+        });
     }
 
     handleDelete() {
@@ -97,6 +115,7 @@ class Review extends React.Component {
     render() {
         return (
             <>
+            <ReviewModal show={this.state.modalShow} onHide={this.toggleModal} reviewId={this.props.id} rating={this.props.rating} title={this.props.title} content={this.props.content} />
             <Card className="mt-2 mb-2 ml-2 mr-2">
                 <Row className="mt-4">
                     <Col className="text-left ml-4"><Card.Subtitle className="text-muted">{this.props.username}</Card.Subtitle></Col>
@@ -116,6 +135,7 @@ class Review extends React.Component {
                     (<Card.Footer>
                         <Row>
                             <Col>
+                                <Button onClick={this.toggleModal} className="mr-2" variant="outline-primary">Editar</Button>
                                 <Button onClick={this.handleDelete} variant="outline-danger">Borrar</Button>
                             </Col>
                         </Row>
