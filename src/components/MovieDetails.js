@@ -3,6 +3,7 @@ import MoviesApi from './MoviesApi';
 import SearchBarApi from './SearchBarApi';
 import { Alert } from 'react-bootstrap';
 import {userService} from '../_services/user.service';
+import Recomendaciones from '../../src/Recomendaciones';
 
 class MovieDetails extends React.Component {
 
@@ -66,8 +67,7 @@ class MovieDetails extends React.Component {
                     })
                 }
             )
-        });
-        
+        });        
       }
 
     handleStatusChange(event){
@@ -126,8 +126,9 @@ class MovieDetails extends React.Component {
     
     render(){
         const {movie, status} = this.state;
+        console.log(movie.imdb_id);
         return (
-            <div>
+            <div style={{maxWidth:"100%"}}>
                 <div className="film-css row shadow-sm bg-white rounded my-3">
                 <Alert variant="success" className={(this.state.success)? ("col-12"): ("d-none")}>Estado guardado con éxito</Alert>
                 <Alert variant="danger" className={(this.state.error)? ("col-12"): ("d-none")}>Algo ha ido mal</Alert>
@@ -160,8 +161,10 @@ class MovieDetails extends React.Component {
                                 </h6>
                             </div>
                             
-                        </div>
+                        </div>                    
                     </div>
+                    
+
                     <div className="col-md-6">
                         <div className="row my-4 text-primary">
                         <h3>{movie.title}</h3>
@@ -180,6 +183,13 @@ class MovieDetails extends React.Component {
                     <div className="col-md-3 mt-4 pl-4 text-justify text-secondary">
                         
                     </div>
+                </div>
+                <div>
+                    <h2 className="tituloListaNoRecomendada">Quizás te pueda interesar...</h2>
+                    {(movie.imdb_id)? <Recomendaciones tipoRecomendacion="2" categoria="1" idRecomendacion={movie.imdb_id} visibleSlides="5" number="10"/> : ""}
+                    
+                    {/* supuestamente solo trae peliulas */}
+                    {/* <Recomendaciones tipoRecomendacion="2" categoria="2" idRecomendacion="tt0903747" visibleSlides="5" number="10"/> */}
                 </div>
             </div>
         );
