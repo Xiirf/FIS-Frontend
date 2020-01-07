@@ -55,7 +55,7 @@ class Slider extends React.Component{
     }
 
     addPeliculaListaNegra(idPelicula){
-        const url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR); // http://localhost:3000/recomendador/v1/
+        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
         //const urlAPI = "http://localhost:3000/recomendador/v1/listaNegra/pelicula/" + idPelicula;
         var urlAPI = url_api + "listaNegra/pelicula/" + idPelicula;
         
@@ -82,7 +82,7 @@ class Slider extends React.Component{
 
     addSerieListaNegra(idSerie){
         
-        const url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR); // http://localhost:3000/recomendador/v1/
+        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
         //const urlAPI = "http://localhost:3000/recomendador/v1/listaNegra/serie/" + idSerie;
         var urlAPI = url_api + "listaNegra/serie/" + idSerie;
 

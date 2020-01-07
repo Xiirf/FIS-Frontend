@@ -22,7 +22,7 @@ class ListaNegraRecomendaciones extends React.Component{
         this.setState({ isLoading: true });        
         //window.alert("test token: " + test_token);
 
-        const url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR); // http://localhost:3000/recomendador/v1/
+        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
 
         var urlListaNegraPeliculas = "";
         var urlListaNegraSeries    = "";
@@ -85,7 +85,10 @@ class ListaNegraRecomendaciones extends React.Component{
     }
 
     deletePeliculaListaNegra(idPelicula){
-        const urlAPI = "http://localhost:3000/recomendador/v1/listaNegra/pelicula/" + idPelicula;
+        //const urlAPI = "http://localhost:3000/recomendador/v1/listaNegra/pelicula/" + idPelicula;
+        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
+        var urlAPI = url_api + "listaNegra/pelicula/" + idPelicula;
+
         var data = {username: 'example'};
         //window.alert(urlAPI);
             
@@ -114,7 +117,10 @@ class ListaNegraRecomendaciones extends React.Component{
     }
 
     deleteSerieListaNegra(idSerie){
-        const urlAPI = "http://localhost:3000/recomendador/v1/listaNegra/serie/" + idSerie;
+        //const urlAPI = "http://localhost:3000/recomendador/v1/listaNegra/serie/" + idSerie;
+        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
+        var urlAPI = url_api + "listaNegra/serie/" + idSerie;
+
         var data = {username: 'example'};
         //window.alert(urlAPI);
 

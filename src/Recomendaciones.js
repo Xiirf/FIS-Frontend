@@ -37,7 +37,7 @@ class Recomendaciones extends React.Component{
         var idRecomendacion = this.state.idRecomendacion;
         //window.alert("idRecomendacion: " + idRecomendacion);
 
-        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR); // http://localhost:3000/recomendador/v1/
+        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
         //window.alert("REACT_APP_URL_API_RECOMENDADOR: " + url_api);
         
         // transformamos la url
