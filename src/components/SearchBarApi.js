@@ -7,7 +7,7 @@ class SearchBarApi {
 
     static getMovies(query, page) {
         const headers = this.requestHeaders();
-        const request = new Request("https://fis-ms-movies.herokuapp.com/" + SearchBarApi.API_BASE_URL + "?query=" + query + "&page=" + page, {
+        const request = new Request("https://fis-api-gateway.herokuapp.com/" + SearchBarApi.API_BASE_URL + "?query=" + query + "&page=" + page, {
             method: 'GET',
             headers: headers
         });
@@ -20,7 +20,7 @@ class SearchBarApi {
 
     static getMovieByID(id){
         const headers = this. requestHeaders();
-        const request = new Request("https://fis-ms-movies.herokuapp.com/" + SearchBarApi.API_BASE_URL + "/" + id, {
+        const request = new Request("https://fis-api-gateway.herokuapp.com/" + SearchBarApi.API_BASE_URL + "/" + id, {
             method: 'GET',
             headers: headers
         });
