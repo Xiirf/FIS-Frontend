@@ -4,6 +4,7 @@ import SearchBarApi from './SearchBarApi';
 import { Alert } from 'react-bootstrap';
 import {userService} from '../_services/user.service';
 import Recomendaciones from '../../src/Recomendaciones';
+import Reviews from './Reviews/Reviews';
 
 class MovieDetails extends React.Component {
 
@@ -191,6 +192,7 @@ class MovieDetails extends React.Component {
                     {/* supuestamente solo trae peliulas */}
                     {/* <Recomendaciones tipoRecomendacion="2" categoria="2" idRecomendacion="tt0903747" visibleSlides="5" number="10"/> */}
                 </div>
+                <Reviews resourceId={movie.id} user={this.state.user.login}/>
             </div>
         );
     }
