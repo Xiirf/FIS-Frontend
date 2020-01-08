@@ -108,7 +108,9 @@ class Review extends React.Component {
     handleDelete() {
         reviewService.deleteReview(this.props.id).then((response) => {
             alert(response.msg);
-            this.props.action(this.props.imdbId);
+            window.location.reload();
+        }).catch((err) => {
+            alert(err);
         });
     }
 

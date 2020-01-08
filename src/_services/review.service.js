@@ -9,7 +9,7 @@ export const reviewService = {
     deleteReview
 };
 
-const REVIEW_API_URL = 'http://localhost:3000/v1';
+const REVIEW_API_URL = 'https://fis-api-gateway.herokuapp.com/api/v1';
 
 function getReviews(resource, limit, skip) {
     const requestOptions = { method: 'GET' };
