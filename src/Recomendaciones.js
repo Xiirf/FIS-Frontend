@@ -6,6 +6,7 @@ import {authenticationService} from './_services/authentication.service';
 let test_token = process.env.REACT_APP_TEST_TOKEN;
 
 class Recomendaciones extends React.Component{
+    static API_BASE_URL = "api/v1/";
 
     constructor(props){
         super(props);
@@ -37,7 +38,9 @@ class Recomendaciones extends React.Component{
         var idRecomendacion = this.state.idRecomendacion;
         //window.alert("idRecomendacion: " + idRecomendacion);
 
-        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
+        //var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
+        var uri = "https://fis-api-gateway.herokuapp.com/" + Recomendaciones.API_BASE_URL; // https://fis-api-gateway.herokuapp.com/recomendador/v1/
+        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || uri); // http://localhost:3000/recomendador/v1/
         //window.alert("REACT_APP_URL_API_RECOMENDADOR: " + url_api);
         
         // transformamos la url

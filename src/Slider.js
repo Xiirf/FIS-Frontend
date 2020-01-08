@@ -6,6 +6,9 @@ import {authenticationService} from './_services/authentication.service';
 let test_token = process.env.REACT_APP_TEST_TOKEN;
 
 class Slider extends React.Component{
+    static API_BASE_URL = "api/v1/";
+    static URI = "https://fis-api-gateway.herokuapp.com/" + Slider.API_BASE_URL; // https://fis-api-gateway.herokuapp.com/recomendador/v1/
+    static URI_API = (process.env.REACT_APP_URL_API_RECOMENDADOR || Slider.URI);
 
     constructor(props){
         super(props);
@@ -55,9 +58,13 @@ class Slider extends React.Component{
     }
 
     addPeliculaListaNegra(idPelicula){
-        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
+        //var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
         //const urlAPI = "http://localhost:3000/recomendador/v1/listaNegra/pelicula/" + idPelicula;
-        var urlAPI = url_api + "listaNegra/pelicula/" + idPelicula;
+        
+        //var uri = "https://fis-api-gateway.herokuapp.com/" + Slider.API_BASE_URL; // https://fis-api-gateway.herokuapp.com/recomendador/v1/
+        //var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || uri);
+        var urlAPI = Slider.URI_API + "listaNegra/pelicula/" + idPelicula;
+        console.log("urlAPI: " + urlAPI);
         
         var data = {username: 'example'};
         //window.alert(urlAPI);
@@ -82,9 +89,12 @@ class Slider extends React.Component{
 
     addSerieListaNegra(idSerie){
         
-        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
+        //var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
         //const urlAPI = "http://localhost:3000/recomendador/v1/listaNegra/serie/" + idSerie;
-        var urlAPI = url_api + "listaNegra/serie/" + idSerie;
+        
+        //var uri = "https://fis-api-gateway.herokuapp.com/" + Slider.API_BASE_URL; // https://fis-api-gateway.herokuapp.com/recomendador/v1/
+        //var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || uri);
+        var urlAPI = Slider.URI_API + "listaNegra/serie/" + idSerie;
 
         var data = {username: 'example'};
         //window.alert(urlAPI);
@@ -97,13 +107,13 @@ class Slider extends React.Component{
               //'authorization' : test_token,
               'authorization': authenticationService.currentTokenValue.token
             }
-          }).then(res => res.json())
-          .catch(error => window.alert('Error:', error))
+          }).then(res => res.json())          
           .then(response => {
               //window.alert('Success:', response)
               this.removeRecomendacionFromArray(idSerie);
               window.alert("Serie añadida a la lista no recomendada!");
-          }); 
+          })
+          .catch(error => window.alert('Error:', error));
     }
     
 
