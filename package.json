@@ -23,6 +23,8 @@
     "react-toastify": "^5.5.0",
     "react-whirligig": "^6.5.14",
     "styled-components": "^4.4.1",
+    "sweetalert": "^2.1.2",
+    "sweetalert2-react": "^0.8.3",
     "whirligig": "^1.0.0",
     "yup": "^0.28.0"
   },
