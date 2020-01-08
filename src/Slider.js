@@ -73,29 +73,6 @@ class Slider extends React.Component{
             
             }
           });
-
-        /* if (tipoRec == 1){
-            // pelicula
-            if (window.confirm('¿Estás seguro que desea añadir la película a la lista de no recomendar?')) {
-                // Save it!
-                this.addPeliculaListaNegra(id_recomendacion);
-            } else {
-                // Do nothing!
-            }
-            
-        } else if (tipoRec == 2){
-            // serie
-            if (window.confirm('¿Estás seguro que desea añadir la serie a la lista de no recomendar?')) {
-                // Save it!
-                this.addSerieListaNegra(id_recomendacion);
-            } else {
-                // Do nothing!
-            }
-                        
-        } else {
-            // error
-            window.alert("Lo sentimos! Se ha producido un error inesperado. No se puede añadir a la lista de no recomendaciones. Inténtelo de nuevo más tarde.");            
-        } */
     }
 
     addPeliculaListaNegra(idPelicula){

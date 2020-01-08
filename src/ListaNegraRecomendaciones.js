@@ -2,6 +2,7 @@ import React from 'react';
 import { Ring } from 'react-awesome-spinners';
 import ListaNegra from './ListaNegra.js';
 import {authenticationService} from './_services/authentication.service';
+import swal from 'sweetalert';
 
 let test_token = process.env.REACT_APP_TEST_TOKEN;
 
@@ -68,28 +69,47 @@ class ListaNegraRecomendaciones extends React.Component{
         var tipoRec = tipo;
         //window.alert("id recurso: " + id_recomendacion + ", tipo: " + tipo);        
 
+        var titleSwal = "";
+        var textSwal = "";
+        var textConfirmSwalDeleted = "";
+
         if (tipoRec == 1){
-            // pelicula
-            if (window.confirm('¿Estás seguro que desea eliminar la película de la lista de no recomendadas?')) {
-                // Save it!
-                this.deletePeliculaListaNegra(idElemento);
-            } else {
-                // Do nothing!
-            }
-            
+            // pelicula            
+            titleSwal = "Eliminar de la lista!";
+            textSwal = "¿Estás seguro que desea eliminar la película a la lista de no recomendadas?"
+            textConfirmSwalDeleted = "La película ha sido eliminada correctamente!";
+
         } else if (tipoRec == 2){
-            // serie
-            if (window.confirm('¿Estás seguro que desea eliminar la serie de la lista de no recomendadas?')) {
-                // Save it!
-                this.deleteSerieListaNegra(idElemento);
-            } else {
-                // Do nothing!
-            }
-                        
+            // serie            
+            titleSwal = "Eliminar de la lista!";
+            textSwal = "¿Estás seguro que desea eliminar la serie a la lista de no recomendadas?"
+            textConfirmSwalDeleted = "La serie ha sido eliminada correctamente!";
+
         } else {
             // error
-            window.alert("Lo sentimos! Se ha producido un error inesperado. No se puede eliminar de la lista de no recomendadas. Inténtelo de nuevo más tarde.");
+            swal("Oops!", "Se ha producido un error inesperado. No se puede eliminar de la lista de no recomendadas. Inténtelo de nuevo más tarde.", "error");
         }
+
+        swal({
+            title: titleSwal,
+            text: textSwal,
+            icon: "warning",
+            dangerMode: true,
+            showCancelButton: true,
+          })
+          .then(willDelete => {
+            if (willDelete) {
+                if (tipoRec == 1){
+                    this.deletePeliculaListaNegra(idElemento);
+                    swal("Eliminada!", textConfirmSwalDeleted, "success");
+                } else if (tipoRec == 2){
+                    this.deleteSerieListaNegra(idElemento);
+                    swal("Eliminada!", textConfirmSwalDeleted, "success");
+                }
+            
+            }
+          });
+        
     }
 
     deletePeliculaListaNegra(idPelicula){
@@ -121,9 +141,11 @@ class ListaNegraRecomendaciones extends React.Component{
                 newState.peliculasNR.splice(index, 1);
 
                 this.setState(newState); // This will update the state and trigger a rerender of the components
-                window.alert("Pelicula eliminada de la lista no recomendadas!");
+                //window.alert("Pelicula eliminada de la lista no recomendadas!");
           })
-          .catch(error => window.alert('Error:', error));      
+          .catch(error => 
+            swal("Oops!", "Se ha producido un error inesperado. No se puede eliminar de la lista de no recomendadas. Inténtelo de nuevo más tarde.", "error")
+          );      
 
     }
 
@@ -157,9 +179,11 @@ class ListaNegraRecomendaciones extends React.Component{
               newState.seriesNR.splice(index, 1);
 
               this.setState(newState); // This will update the state and trigger a rerender of the components
-              window.alert("Serie eliminada de la lista no recomendadas!");
+              //window.alert("Serie eliminada de la lista no recomendadas!");
           })
-          .catch(error => window.alert('Error:', error)); 
+          .catch(error => 
+            swal("Oops!", "Se ha producido un error inesperado. No se puede eliminar de la lista de no recomendadas. Inténtelo de nuevo más tarde.", "error")
+            ); 
     }
 
     render(){
