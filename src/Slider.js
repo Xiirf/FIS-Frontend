@@ -2,10 +2,14 @@ import React from 'react';
 import Recomendacion from './Recomendacion';
 import Whirligig from 'react-whirligig';
 import {authenticationService} from './_services/authentication.service';
+import swal from 'sweetalert';
 
 let test_token = process.env.REACT_APP_TEST_TOKEN;
 
 class Slider extends React.Component{
+    static API_BASE_URL = "api/v1/";
+    static URI = "https://fis-api-gateway.herokuapp.com/" + Slider.API_BASE_URL; // https://fis-api-gateway.herokuapp.com/recomendador/v1/
+    static URI_API = (process.env.REACT_APP_URL_API_RECOMENDADOR || Slider.URI);
 
     constructor(props){
         super(props);
@@ -29,36 +33,57 @@ class Slider extends React.Component{
         var id_recomendacion = idRecomendacion;
         var tipoRec = tipo;
         //window.alert("id recurso: " + id_recomendacion + ", tipo: " + tipo);        
+        var titleSwal = "";
+        var textSwal = "";
+        var textConfirmSwalDeleted = "";
 
         if (tipoRec == 1){
-            // pelicula
-            if (window.confirm('¿Estás seguro que desea añadir la película a la lista de no recomendar?')) {
-                // Save it!
-                this.addPeliculaListaNegra(id_recomendacion);
-            } else {
-                // Do nothing!
-            }
-            
+            // pelicula            
+            titleSwal = "Añadir a no recomendadas!";
+            textSwal = "¿Estás seguro que desea añadir la película a la lista de no recomendadas?"
+            textConfirmSwalDeleted = "La película ha sido añadida correctamente!";
+
         } else if (tipoRec == 2){
-            // serie
-            if (window.confirm('¿Estás seguro que desea añadir la serie a la lista de no recomendar?')) {
-                // Save it!
-                this.addSerieListaNegra(id_recomendacion);
-            } else {
-                // Do nothing!
-            }
-                        
+            // serie            
+            titleSwal = "Añadir a no recomendadas!";
+            textSwal = "¿Estás seguro que desea añadir la serie a la lista de no recomendadas?"
+            textConfirmSwalDeleted = "La serie ha sido añadida correctamente!";
+
         } else {
             // error
-            window.alert("Lo sentimos! Se ha producido un error inesperado. No se puede añadir a la lista de no recomendaciones. Inténtelo de nuevo más tarde.");
+            swal("Oops!", "Se ha producido un error inesperado. No se puede añadir a la lista de no recomendaciones. Inténtelo de nuevo más tarde.", "error");
         }
+
+        swal({
+            title: titleSwal,
+            text: textSwal,
+            icon: "warning",
+            dangerMode: true,
+            showCancelButton: true,
+          })
+          .then(willDelete => {
+            if (willDelete) {
+                if (tipoRec == 1){
+                    this.addPeliculaListaNegra(id_recomendacion);
+                    swal("Añadida!", textConfirmSwalDeleted, "success");
+                } else if (tipoRec == 2){
+                    this.addSerieListaNegra(id_recomendacion);
+                    swal("Añadida!", textConfirmSwalDeleted, "success");
+                }
+            
+            }
+          });
     }
 
     addPeliculaListaNegra(idPelicula){
-        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
+        //var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
         //const urlAPI = "http://localhost:3000/recomendador/v1/listaNegra/pelicula/" + idPelicula;
-        var urlAPI = url_api + "listaNegra/pelicula/" + idPelicula;
         
+        //var uri = "https://fis-api-gateway.herokuapp.com/" + Slider.API_BASE_URL; // https://fis-api-gateway.herokuapp.com/recomendador/v1/
+        //var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || uri);
+        var urlAPI = Slider.URI_API + "listaNegra/pelicula/" + idPelicula;
+        console.log("urlAPI: " + urlAPI);
+
         var data = {username: 'example'};
         //window.alert(urlAPI);
         
@@ -74,7 +99,7 @@ class Slider extends React.Component{
           .then(response => {
               //window.alert('Success:', response)
               this.removeRecomendacionFromArray(idPelicula);
-              window.alert("Pelicula añadida a la lista no recomendada!");
+              //window.alert("Pelicula añadida a la lista no recomendada!");
           })
           .catch(error => window.alert('Error:', error));      
 
@@ -82,9 +107,12 @@ class Slider extends React.Component{
 
     addSerieListaNegra(idSerie){
         
-        var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
+        //var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || 'https://recomendador-fis1920.herokuapp.com/recomendador/v1/'); // http://localhost:3000/recomendador/v1/
         //const urlAPI = "http://localhost:3000/recomendador/v1/listaNegra/serie/" + idSerie;
-        var urlAPI = url_api + "listaNegra/serie/" + idSerie;
+        
+        //var uri = "https://fis-api-gateway.herokuapp.com/" + Slider.API_BASE_URL; // https://fis-api-gateway.herokuapp.com/recomendador/v1/
+        //var url_api = (process.env.REACT_APP_URL_API_RECOMENDADOR || uri);
+        var urlAPI = Slider.URI_API + "listaNegra/serie/" + idSerie;
 
         var data = {username: 'example'};
         //window.alert(urlAPI);
@@ -97,13 +125,13 @@ class Slider extends React.Component{
               //'authorization' : test_token,
               'authorization': authenticationService.currentTokenValue.token
             }
-          }).then(res => res.json())
-          .catch(error => window.alert('Error:', error))
+          }).then(res => res.json())          
           .then(response => {
               //window.alert('Success:', response)
               this.removeRecomendacionFromArray(idSerie);
-              window.alert("Serie añadida a la lista no recomendada!");
-          }); 
+              //window.alert("Serie añadida a la lista no recomendada!");
+          })
+          .catch(error => window.alert('Error:', error));
     }
     
 
