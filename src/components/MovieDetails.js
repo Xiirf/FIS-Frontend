@@ -2,6 +2,9 @@ import React from 'react';
 import MoviesApi from './MoviesApi';
 import SearchBarApi from './SearchBarApi';
 import { Alert } from 'react-bootstrap';
+import {userService} from '../_services/user.service';
+import Recomendaciones from '../../src/Recomendaciones';
+import Reviews from './Reviews/Reviews';
 
 class MovieDetails extends React.Component {
 
@@ -9,23 +12,25 @@ class MovieDetails extends React.Component {
 
     constructor(props){
         super(props);
-        this.id_movie = props.params.filter;
+        this.id_movie = props.match.params.filter;
         this.handleStatusChange = this.handleStatusChange.bind(this);
         this.state={
+                user:{},
                 success: false,
                 error: false,
                 id_status: "",
                 status: "",
-                loggued:true,
+                loggued:false,
                 movie: {}
         }
+        console.log("Montado");
     }
 
     componentDidMount() {
+        console.log("Leggue");
         SearchBarApi.getMovieByID(this.id_movie)
             .then(
                 (result) => {
-                console.log(result);
                 this.setState({
                     movie: result,
                 })
@@ -37,27 +42,33 @@ class MovieDetails extends React.Component {
                     })
                 }
             );
-        MoviesApi.getMovieStatusByUserAndMovie("3", this.id_movie)
-                .then(
-                    (result) => {
-                      if(result.length > 0){
-                        console.log(result);
-                        this.setState({
-                          id_status: result[0]._id,
-                          status: result[0].status
-                        })
-                      }else {
-                        this.setState({
-                          status: "No_visto"
-                        })
-                      }
-                    },
-                    (error) => {
-                        this.setState({
-                            errorInfo: "Problem with connection to server"
-                        })
+        userService.getUser().then(user => {
+            this.setState({
+                user:user,
+                loggued:true
+            });
+            MoviesApi.getMovieStatusByUserAndMovie(this.state.user.login, this.id_movie)
+            .then(
+                (result) => {
+                    if(result.length > 0){
+                    console.log(result);
+                    this.setState({
+                        id_status: result[0]._id,
+                        status: result[0].status
+                    })
+                    }else {
+                    this.setState({
+                        status: "No_visto"
+                    })
                     }
-                )
+                },
+                (error) => {
+                    this.setState({
+                        errorInfo: "Problem with connection to server"
+                    })
+                }
+            )
+        });        
       }
 
     handleStatusChange(event){
@@ -68,10 +79,23 @@ class MovieDetails extends React.Component {
     });
     let body = {
         "id_movie": movie.id.toString(),
-        "id_user": "3", //TODO - Change this for the user in te auth 
+        "id_user": this.state.user.login, //TODO - Change this for the user in te auth 
         "status": status
     };
-    if(this.state.id_status === ""){
+    if(status === "No_visto" && this.state.id_status != ""){
+        MoviesApi.deleteMovieStatus(this.state.id_status)
+        .then(
+            (result) => {
+            this.setState({success:true, error: false});
+            },
+            (error) => {
+                this.setState({
+                    error: true,
+                    success: false
+                })
+            }
+        )
+    }else if(this.state.id_status === ""){
         MoviesApi.postMovieStatus(body)
         .then(
             (result) => {
@@ -103,14 +127,45 @@ class MovieDetails extends React.Component {
     
     render(){
         const {movie, status} = this.state;
+        console.log(movie.imdb_id);
         return (
-            <div>
+            <div style={{maxWidth:"100%"}}>
+                <div className="film-css row shadow-sm bg-white rounded my-3">
                 <Alert variant="success" className={(this.state.success)? ("col-12"): ("d-none")}>Estado guardado con éxito</Alert>
                 <Alert variant="danger" className={(this.state.error)? ("col-12"): ("d-none")}>Algo ha ido mal</Alert>
-                <div className="film-css row shadow-sm bg-white rounded my-3">
-                    <div className="col-md-3">
+                    <div className="col-md-5">
                         <img src={MovieDetails.POSTER_URL_TMDB + movie.poster_path} width="300px" className="img-fluid p-3 my-auto"></img>
+                        <div>
+                            <div className={(this.state.loggued)? ("my-2"): ("d-none")}>
+                                <select className="form-control col-md-11 border border-primary mx-auto" value={status} onChange={this.handleStatusChange}>
+                                <option value="No_visto" default>No visto</option>
+                                <option value="Visto">Visto</option>
+                                <option value="Siguiendo">Siguiendo</option>
+                                <option value="Pendiente">Pendiente</option>
+                                </select>
+                            </div>
+                            <div className="px-2">
+                                <h5 className={(movie.vote_average > 6)? "alert alert-success": "alert alert-warning"}>
+                                    Puntuación: {movie.vote_average}
+                                    <br></br>
+                                    Popularidad: {movie.popularity}
+                                </h5>
+                            </div>
+                            <div className="px-3">
+                                <h6>
+                                    Fecha: {movie.release_date} 
+                                    <br></br>
+                                    Generos:
+                                    <ul>
+                                        {(movie.genres)? (movie.genres.map((gen) => <li key={gen.id}>{gen.name}</li>)): ""}
+                                    </ul>
+                                </h6>
+                            </div>
+                            
+                        </div>                    
                     </div>
+                    
+
                     <div className="col-md-6">
                         <div className="row my-4 text-primary">
                         <h3>{movie.title}</h3>
@@ -127,31 +182,17 @@ class MovieDetails extends React.Component {
                         </div>
                     </div>
                     <div className="col-md-3 mt-4 pl-4 text-justify text-secondary">
-                        <div className={(this.state.loggued)? ("pr-5 my-2"): ("d-none")}>
-                            <select className="form-control col-md-11 border border-primary" value={status} onChange={this.handleStatusChange}>
-                            <option value="No_visto" default>No visto</option>
-                            <option value="Visto">Visto</option>
-                            <option value="Siguiendo">Siguiendo</option>
-                            <option value="Pendiente">Pendiente</option>
-                            </select>
-                        </div>
-                        <div className="pr-5">
-                            <h5 className={(movie.vote_average > 6)? "alert alert-success": "alert alert-warning"}>
-                                Puntuación: {movie.vote_average}
-                                <br></br>
-                                Popularidad: {movie.popularity}
-                            </h5>
-                        </div>
-                        <h6>
-                            Fecha: {movie.release_date} 
-                            <br></br>
-                            Generos:
-                            <ul>
-                                {(movie.genres)? (movie.genres.map((gen) => <li key={gen.id}>{gen.name}</li>)): ""}
-                            </ul>
-                        </h6>
+                        
                     </div>
                 </div>
+                <div>
+                    <h2 className="tituloListaNoRecomendada">Quizás te pueda interesar...</h2>
+                    {(movie.imdb_id)? <Recomendaciones tipoRecomendacion="2" categoria="1" idRecomendacion={movie.imdb_id} visibleSlides="5" number="10"/> : ""}
+                    
+                    {/* supuestamente solo trae peliulas */}
+                    {/* <Recomendaciones tipoRecomendacion="2" categoria="2" idRecomendacion="tt0903747" visibleSlides="5" number="10"/> */}
+                </div>
+                <Reviews resourceId={movie.id} user={this.state.user.login}/>
             </div>
         );
     }

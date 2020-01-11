@@ -25,8 +25,10 @@ class PaginationBar extends React.Component{
           }
 
         return (
-            <div className="row btn-group border rounded-pill">
-                <Pagination>{items}</Pagination>
+            <div>
+                <div className="row btn-group border rounded-pill mx-auto">
+                    <Pagination>{items}</Pagination>
+                </div>
             </div>
         )
     }

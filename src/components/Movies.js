@@ -3,25 +3,25 @@ import Movie from './Movie';
 import SearchBar from './Searchbar';
 import SearchBarApi from './SearchBarApi';
 import PaginationBar from './PaginationBar';
+import qs from 'qs';
 import Spinner from 'react-bootstrap/Spinner';
 
 
 class Movies extends React.Component {
     constructor(props){
         super(props);
+        this.url_params = qs.parse(this.props.location.search, { ignoreQueryPrefix: true });
         this.apijson = "";
         this.state = { 
             errorInfo: null,
             pagination: false,
             response: [],
             movies:[],
-            currentPage: this.props.location.query.page,
+            currentPage: (this.url_params)? this.url_params.page: 1 ,
             totalPages: null,
-            query: this.props.location.query.query,
-            currentPage: this.props.location.query.page,
-            isEditing: {},
-            query: this.props.location.query.query
+            query: (this.url_params)? this.url_params.query: ""
         };
+        
     }
 
     componentDidMount(){
@@ -57,10 +57,8 @@ class Movies extends React.Component {
             totalShow: 10,
             query: this.state.query
         }
-        console.log(pagination);
         return (
             <div className="container">
-                <SearchBar></SearchBar>
                 { (this.state.movies)? (this.state.movies.map((movie) => 
                             <Movie key={movie.id} movie={movie}></Movie>
                         )):""}   

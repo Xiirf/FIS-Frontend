@@ -1,5 +1,5 @@
 class SearchBarApi {
-    static API_BASE_URL = "/api/v1/search_api";
+    static API_BASE_URL = "api/v1/search_api";
 
     static requestHeaders() {
         return {}
@@ -7,11 +7,12 @@ class SearchBarApi {
 
     static getMovies(query, page) {
         const headers = this.requestHeaders();
-        const request = new Request(SearchBarApi.API_BASE_URL + "?query=" + query + "&page=" + page, {
+        const request = new Request("https://fis-api-gateway.herokuapp.com/" + SearchBarApi.API_BASE_URL + "?query=" + query + "&page=" + page, {
             method: 'GET',
             headers: headers
         });
 
+        console.log(request);
         return fetch(request).then(response => {
             return response.json();
         });
@@ -19,7 +20,7 @@ class SearchBarApi {
 
     static getMovieByID(id){
         const headers = this. requestHeaders();
-        const request = new Request(SearchBarApi.API_BASE_URL + "/" + id, {
+        const request = new Request("https://fis-api-gateway.herokuapp.com/" + SearchBarApi.API_BASE_URL + "/" + id, {
             method: 'GET',
             headers: headers
         });
