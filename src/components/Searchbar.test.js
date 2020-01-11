@@ -1,7 +1,7 @@
 import React from 'react';
-import SearchBar from '../components/SearchBar';
+import SearchBar from './SearchBar';
 import { render, unmountComponentAtNode} from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import { act,Simulate } from 'react-dom/test-utils';
 
 let container = document.createElement("div");
 beforeEach(()=>{
@@ -23,18 +23,15 @@ it("render search bar",()=>{
     expect(container.textContent).toEqual(expect.stringContaining(""));
 });
 
+/*
 it("Change in query",()=>{
     const onChange = jest.fn()
     act(()=>{
-        render(<SearchBar onChange={onChange}></SearchBar>,container);
+        render(<SearchBar></SearchBar>,container);
+        const input_query = document.getElementsByName("query")[0];
+        input_query.value = 'Star Wars';
     });
 
-    const input_query = document.querySelector("[name=query]");
-
-    act(()=>{
-        input_query.dispatchEvent(new Event('change',{
-                bubbles:true,
-        }));
-    })
-    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(container.textContent).toEqual(expect.stringContaining('Star Wars'));
 })
+*/
