@@ -23,7 +23,7 @@
     "react-rater": "^5.1.1",
     "react-router": "^3.2.5",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.3.0",
+    "react-scripts": "3.2.0",
     "react-toastify": "^5.5.0",
     "react-whirligig": "^6.5.14",
     "styled-components": "^4.4.1",
