@@ -22,16 +22,3 @@ it("render search bar",()=>{
     expect(container.hasChildNodes()).toBe(true);
     expect(container.textContent).toEqual(expect.stringContaining(""));
 });
-
-/*
-it("Change in query",()=>{
-    const onChange = jest.fn()
-    act(()=>{
-        render(<SearchBar></SearchBar>,container);
-        const input_query = document.getElementsByName("query")[0];
-        input_query.value = 'Star Wars';
-    });
-
-    expect(container.textContent).toEqual(expect.stringContaining('Star Wars'));
-})
-*/
