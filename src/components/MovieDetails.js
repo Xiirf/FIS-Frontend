@@ -23,11 +23,9 @@ class MovieDetails extends React.Component {
                 loggued:false,
                 movie: {}
         }
-        console.log("Montado");
     }
 
     componentDidMount() {
-        console.log("Leggue");
         SearchBarApi.getMovieByID(this.id_movie)
             .then(
                 (result) => {
@@ -127,7 +125,6 @@ class MovieDetails extends React.Component {
     
     render(){
         const {movie, status} = this.state;
-        console.log(movie.imdb_id);
         return (
             <div style={{maxWidth:"100%"}}>
                 <div className="film-css row shadow-sm bg-white rounded my-3">
