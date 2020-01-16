@@ -12,7 +12,7 @@ export const reviewService = {
 const REVIEW_API_URL = 'https://fis-api-gateway.herokuapp.com/api/v1';
 
 function getReviews(resource, limit, skip) {
-    const requestOptions = { method: 'GET' };
+    const requestOptions = { method: 'GET' , headers: authHeader()};
     return fetch(`${REVIEW_API_URL}/reviews?limit=${limit}&skip=${skip}&imdbId=${resource}`, requestOptions).then(handleResponse);
 }
 
