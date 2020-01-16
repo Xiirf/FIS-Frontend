@@ -15,6 +15,7 @@ class Movies extends React.Component {
         this.state = { 
             errorInfo: null,
             pagination: false,
+            noFound: false,
             response: [],
             movies:[],
             currentPage: (this.url_params)? this.url_params.page: 1 ,
@@ -33,13 +34,29 @@ class Movies extends React.Component {
             .then(
                 (result) => {
                     console.log(result);
-                    this.setState({
-                        loading:false,
-                        pagination:true,
-                        totalPages: result.total_pages,
-                        movies: result.results,
-                        
-                    });
+                    if(result){
+                        if(result.results.length === 0){
+                            this.setState({
+                                loading:false,
+                                noFound:true
+                            });
+                        } else {
+                            this.setState({
+                                loading:false,
+                                noFound:false,
+                                pagination:true,
+                                totalPages: result.total_pages,
+                                movies: result.results,
+                                
+                            });
+                        }
+                    } else {
+                        this.setState({
+                            loading:false,
+                            noFound:true
+                        });
+                    }
+                    
                 },
                 (error) => {
                     this.setState({
@@ -63,7 +80,7 @@ class Movies extends React.Component {
                             <Movie key={movie.id} movie={movie}></Movie>
                         )):""}   
                 <div className="row">
-
+                {(this.state.noFound)?<span className="mx-auto">No se ha encontrado nada en la busqueda ... </span>:""}
                 {(this.state.loading)?(
                     <Spinner animation="grow" className="mx-auto"/>
                 ):<Spinner animation="grow" className="mx-auto d-none"/>}
