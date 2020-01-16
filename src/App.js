@@ -51,7 +51,7 @@ class App extends React.Component {
                 <div>
                     <nav className="navbar navbar-expand navbar-dark bg-dark">
                         <div className="navbar-nav" style={{width:"100%"}}>
-                            <Link to="/" className="nav-item nav-link">Inicio</Link>
+                            <Link to="/" className="nav-item nav-link"><img class="App-logo" src="/logo.svg"></img></Link>
                             {
                                 currentToken ? 
                                     <div className="navbar-nav">

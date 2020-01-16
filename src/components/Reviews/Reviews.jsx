@@ -105,6 +105,9 @@ class Reviews extends React.Component {
                          spams={review.impressions.spam}
                          timestamp={review.created}
                          imdbId={this.props.resourceId}
+                         liked={review.like || false}
+                         spammed={review.spam || false}
+                         disliked={review.dislike || false}
                          owner={this.props.user == review.user} action={this.handleChildFunc} ></Review>
                     ))
                 }
