@@ -18,10 +18,10 @@ afterEach(() => {
 });
 
 it('renders without crashing', () => {
-  render(<Resetpassword />, container);
+  render(<Resetpassword match={{params: {token: 12345}}} />, container);
 });
 
 it("matches the snapshot", () => {
-    const resetpassword = create(<Resetpassword />);
+    const resetpassword = create(<Resetpassword match={{params: {token: 12345}}} />);
     expect(resetpassword.toJSON()).toMatchSnapshot();
 });

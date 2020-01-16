@@ -56,5 +56,26 @@ exports[`matches the snapshot 1`] = `
       </button>
     </div>
   </form>
+  <div
+    className="d-flex justify-content-center links"
+  >
+    ¿No tiene una cuenta?   
+    <a
+      href="/signup"
+      onClick={[Function]}
+    >
+      Inscribirse
+    </a>
+  </div>
+  <div
+    className="d-flex justify-content-center"
+  >
+    <a
+      href="/forgottenpassword"
+      onClick={[Function]}
+    >
+      ¿Olvidó su contraseña?
+    </a>
+  </div>
 </div>
 `;

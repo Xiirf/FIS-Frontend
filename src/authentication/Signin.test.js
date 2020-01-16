@@ -1,5 +1,6 @@
 import React from 'react';
 import Signin from './Signin';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { create } from "react-test-renderer";
 
@@ -18,10 +19,10 @@ afterEach(() => {
 });
 
 it('renders without crashing', () => {
-  render(<Signin />, container);
+  render(<Router><Signin /></Router>, container);
 });
 
 it("matches the snapshot", () => {
-    const signin = create(<Signin />);
+    const signin = create(<Router><Signin /></Router>);
     expect(signin.toJSON()).toMatchSnapshot();
 });
