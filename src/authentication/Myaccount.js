@@ -22,6 +22,7 @@ class Myaccount extends React.Component {
         this.handleEditPassword = this.handleEditPassword.bind(this);
         this.handleCancelEditPassword = this.handleCancelEditPassword.bind(this);
         this.updateUser = this.updateUser.bind(this);
+        this.deleteAccount = this.deleteAccount.bind(this);
     }
 
     componentDidMount() {
@@ -48,8 +49,34 @@ class Myaccount extends React.Component {
         userService.getUser().then(user => this.setState({user: user}));
     }
 
+    deleteAccount() {
+        authenticationService.deleteAccount()
+            .then(
+                () => {
+                    this.successEdit("La cuenta se ha eliminado con éxito");
+                    authenticationService.logout();
+                    const { from } = this.props.location.state || { from: { pathname: "/" } };
+                    this.props.history.push(from);
+                },
+                () => {
+                    this.errorDelete("Se ha producido un error al borrar la cuenta.");
+                }
+            );
+    }
+
     successEdit = (message) => {
         toast.success(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+            });
+    }
+
+    errorDelete = (message) => {
+        toast.error(message, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -189,56 +216,14 @@ class Myaccount extends React.Component {
                                     }
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <button type="button" className="btn btn-primary" onClick={this.deleteAccount}>Borrar la cuenta</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 }
-            {/*    <Formik 
-                    initialValues={{
-                        username: '',
-                        password: ''
-                    }}
-                    validationSchema={Yup.object().shape({
-                        username: Yup.string().required('Username is required'),
-                        password: Yup.string().required('Password is required')
-                    })}
-                    onSubmit={({ username, password }, { setStatus, setSubmitting }) => {
-                        setStatus();
-                        authenticationService.login(username, password)
-                            .then(
-                                user => {
-                                    const { from } = this.props.location.state || { from: { pathname: "/" } };
-                                    this.props.history.push(from);
-                                },
-                                error => {
-                                    setSubmitting(false);
-                                    setStatus(error);
-                                }
-                            );
-                    }}
-                    render={({ errors, status, touched, isSubmitting }) => (
-                        <Form>
-                            <div className="form-group">
-                                <label htmlFor="username">Username</label>
-                                <Field name="username" type="text" className={'form-control' + (errors.username && touched.username ? ' is-invalid' : '')} />
-                                <ErrorMessage name="username" component="div" className="invalid-feedback" />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
-                                <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
-                                <ErrorMessage name="password" component="div" className="invalid-feedback" />
-                            </div>
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-primary" disabled={isSubmitting}>Login</button>
-                                {isSubmitting &&
-                                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                                }
-                            </div>
-                            {status &&
-                                <div className={'alert alert-danger'}>{status}</div>
-                            }
-                        </Form>
-                    )}
-                        />*/}
             </div>
         )
     }

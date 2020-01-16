@@ -13,8 +13,6 @@ export function handleResponse(response) {
                 window.location.reload(true);
             }
 
-            console.log(data)
-
             const error = (data && data.error) || response.statusText;
             return Promise.reject(error);
         }
