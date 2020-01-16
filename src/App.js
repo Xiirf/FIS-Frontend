@@ -8,9 +8,11 @@ import Home from './pages/Home';
 import Signin from './authentication/Signin';
 import Signup from './authentication/Signup';
 import Myaccount from './authentication/Myaccount';
+import Forgottenpassword from './authentication/Forgottenpassword';
 
 import { history } from './_helpers/history';
 import { authenticationService } from './_services/authentication.service';
+import Resetpassword from './authentication/Resetpassword';
 
 class App extends React.Component {
     constructor(props) {
@@ -61,6 +63,8 @@ class App extends React.Component {
                                     <Route exact path="/" component={Home} />
                                     <Route exact path="/signin" component={Signin} />
                                     <Route exact path="/signup" component={Signup} />
+                                    <Route exact path="/forgottenpassword" component={Forgottenpassword} />
+                                    <Route path='/resetpassword/:token' component={Resetpassword} />
                                     <PrivateRoute exact path="/myaccount" component={Myaccount} />
                                 </div>
                             </div>
