@@ -9,12 +9,14 @@ import ListaNoRecomendadas from './pages/ListaNoRecomendadas';
 import Signin from './authentication/Signin';
 import Signup from './authentication/Signup';
 import Myaccount from './authentication/Myaccount';
+import Forgottenpassword from './authentication/Forgottenpassword';
 
 import Movies from './components/Movies';
 import MovieDetails from './components/MovieDetails';
 
 import { history } from './_helpers/history';
 import { authenticationService } from './_services/authentication.service';
+import Resetpassword from './authentication/Resetpassword';
 import SearchBar from './components/Searchbar';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -49,7 +51,7 @@ class App extends React.Component {
                 <div>
                     <nav className="navbar navbar-expand navbar-dark bg-dark">
                         <div className="navbar-nav" style={{width:"100%"}}>
-                            <Link to="/" className="nav-item nav-link">Inicio</Link>
+                            <Link to="/" className="nav-item nav-link"><img class="App-logo" src="/logo.svg"></img></Link>
                             {
                                 currentToken ? 
                                     <div className="navbar-nav">
@@ -91,6 +93,8 @@ class App extends React.Component {
                                     <Route exact path="/signup" component={Signup} />
                                     <Route exact path="/search" component={Movies}></Route>
                                     <Route exact path="/movie/:filter" component={MovieDetails}></Route>
+                                    <Route exact path="/forgottenpassword" component={Forgottenpassword} />
+                                    <Route path='/resetpassword/:token' component={Resetpassword} />
                                     <PrivateRoute exact path="/myaccount" component={Myaccount} />
                                 {/* </div> */}
                             </div>

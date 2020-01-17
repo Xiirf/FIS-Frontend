@@ -4,6 +4,7 @@ import SearchBarApi from './SearchBarApi';
 import { Alert } from 'react-bootstrap';
 import {userService} from '../_services/user.service';
 import Recomendaciones from '../../src/Recomendaciones';
+import Reviews from './Reviews/Reviews';
 
 class MovieDetails extends React.Component {
 
@@ -22,11 +23,9 @@ class MovieDetails extends React.Component {
                 loggued:false,
                 movie: {}
         }
-        console.log("Montado");
     }
 
     componentDidMount() {
-        console.log("Leggue");
         SearchBarApi.getMovieByID(this.id_movie)
             .then(
                 (result) => {
@@ -126,7 +125,6 @@ class MovieDetails extends React.Component {
     
     render(){
         const {movie, status} = this.state;
-        console.log(movie.imdb_id);
         return (
             <div style={{maxWidth:"100%"}}>
                 <div className="film-css row shadow-sm bg-white rounded my-3">
@@ -191,6 +189,7 @@ class MovieDetails extends React.Component {
                     {/* supuestamente solo trae peliulas */}
                     {/* <Recomendaciones tipoRecomendacion="2" categoria="2" idRecomendacion="tt0903747" visibleSlides="5" number="10"/> */}
                 </div>
+                <Reviews resourceId={movie.id} user={this.state.user.login}/>
             </div>
         );
     }

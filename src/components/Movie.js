@@ -15,7 +15,7 @@ class Movie extends React.Component {
   render(){
     return (
       <div>
-        <Link to={"/movie/"+ this.id_movie} activeStyle={{textDecoration: 'none'}} style={{textDecoration: 'none'}}>
+        <Link to={"/movie/"+ this.id_movie} style={{textDecoration: 'none'}}>
           <div className="film-css row shadow-sm bg-white rounded my-3">
             <div className="col-md-4">
               <img src={Movie.POSTER_URL_TMDB + this.props.movie.poster_path} width="300px" className="img-fluid p-1 pt-3 pb-2 my-auto"></img>

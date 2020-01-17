@@ -4,6 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { faCheckSquare, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {Redirect} from 'react-router-dom';
 
 library.add(fab, faCheckSquare, faEyeSlash);
 
@@ -16,6 +17,13 @@ class Recomendacion extends React.Component{
             recomendacion: this.props.recomendacion, // atributos de la pelicula o serie
             tipo : this.props.tipo, // tipo 1 => pelicula, tipo 2 => serie,
         };
+    }
+
+    clickGoToDetails(ev, ressourceId, tipoRec) {
+        ev.stopPropagation();
+        const strRessourceType = tipoRec == 1 ? "movie" : tipoRec == 2 ? "serie" : null;
+        if(!strRessourceType) return;
+        window.location =`/${strRessourceType}/${ressourceId}`;
     }
 
     render(){
@@ -138,7 +146,7 @@ class Recomendacion extends React.Component{
                         
                         <button data-testid="clickedListaNegra" type="button" name="boton_lista_negra" value={this.state.recomendacion.id} className="btn btn-danger boton_lista_negra" title="Añadir a la lista de No Recomendaciones" onClick={() => this.props.clickAddListaNegra(this.state.recomendacion.id,this.state.tipo)}><FontAwesomeIcon icon="eye-slash"/></button>
 
-                        <img className="poster" src={urlPoster} alt="texto" title={tituloRecomendacion}/>
+                        <img className="poster" src={urlPoster} alt="texto" title={tituloRecomendacion} onClick={(ev) => this.clickGoToDetails(ev, this.state.recomendacion.id ,this.state.tipo)}/>
                         {/* <span>{this.state.recomendacion.id}</span> */}
 
                         <p className="tituloRecomendacion" title={tituloRecomendacion}>

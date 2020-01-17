@@ -1,5 +1,5 @@
 import React from 'react';
-import Myaccount from './Myaccount';
+import Resetpassword from './Resetpassword';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { create } from "react-test-renderer";
 
@@ -18,10 +18,10 @@ afterEach(() => {
 });
 
 it('renders without crashing', () => {
-  render(<Myaccount />, container);
+  render(<Resetpassword match={{params: {token: ""}}} />, container);
 });
 
 it("matches the snapshot", () => {
-    const myaccount = create(<Myaccount />);
-    expect(myaccount.toJSON()).toMatchSnapshot();
+    const resetpassword = create(<Resetpassword match={{params: {token: ""}}}/>);
+    expect(resetpassword.toJSON()).toMatchSnapshot();
 });

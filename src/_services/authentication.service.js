@@ -10,6 +10,9 @@ export const authenticationService = {
     logout,
     signup,
     edit,
+    forgottenPassword,
+    resetPassword,
+    deleteAccount,
     currentToken: currentTokenSubject.asObservable(),
     get currentTokenValue () { return currentTokenSubject.value }
 };
@@ -49,6 +52,35 @@ function edit(newPassword, newEmail) {
         headers: {...authHeader(), ...{ 'Content-Type': 'application/json' }},
         body: JSON.stringify({ newPassword, newEmail })
     };
+
+    return fetch(`https://fis-api-gateway.herokuapp.com/api/v1/user`, requestOptions)
+        .then(handleResponse);
+}
+
+function forgottenPassword(email) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+    };
+
+    return fetch(`https://fis-api-gateway.herokuapp.com/api/v1/user/forgottenPassword`, requestOptions)
+        .then(handleResponse);
+}
+
+function resetPassword(token, newPassword) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({...{ newPassword }, ...{ 'newEmail': '' }})
+    };
+
+    return fetch(`https://fis-api-gateway.herokuapp.com/api/v1/user`, requestOptions)
+        .then(handleResponse);
+}
+
+function deleteAccount() {
+    const requestOptions = {method: 'DELETE', headers: authHeader()};
 
     return fetch(`https://fis-api-gateway.herokuapp.com/api/v1/user`, requestOptions)
         .then(handleResponse);
