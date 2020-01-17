@@ -184,7 +184,7 @@ class MovieDetails extends React.Component {
                 </div>
                 <div>
                     <h2 className="tituloListaNoRecomendada">Quizás te pueda interesar...</h2>
-                    {(movie.imdb_id)? <Recomendaciones tipoRecomendacion="2" categoria="1" idRecomendacion={movie.imdb_id} visibleSlides="5" number="10"/> : ""}
+                    {(movie.id)? <Recomendaciones tipoRecomendacion="2" categoria="1" idRecomendacion={movie.id} visibleSlides="5" number="10"/> : ""}
                     
                     {/* supuestamente solo trae peliulas */}
                     {/* <Recomendaciones tipoRecomendacion="2" categoria="2" idRecomendacion="tt0903747" visibleSlides="5" number="10"/> */}
